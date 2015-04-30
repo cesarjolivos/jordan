@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xds="http://www.springframework.org/schema/security/spring-security-3.2.3.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+        http://www.springframework.org/schema/security 
+        http://www.springframework.org/schema/security/spring-security-3.2.xsd
+        ">
+    
+    <import resource="configuracionSpring.xml"/>
+    
+    <security:http auto-config="true">
+        <security:intercept-url pattern="/administrador.xhtml" access="ROLE_ADMIN,ROLE_ROOT" />
+        <security:intercept-url pattern="/superAdministrador.xhtml" access="ROLE_ROOT" />
+        <security:intercept-url pattern="/agregarDatos" access="ROLE_ROOT"/>
+        <security:form-login login-page="/index.xhtml?error=logeo"/> 
+    </security:http>
+    
+    <security:authentication-manager>
+        <security:authentication-provider>    
+            <security:jdbc-user-service 
+                data-source-ref="dataSource" 
+                users-by-username-query="SELECT usuario,contrasena,activo
+                                         FROM Usuario 
+                                         WHERE usuario = ?"  
+                authorities-by-username-query="SELECT usuario,privilegio 
+                                        FROM Usuario 
+                                        WHERE usuario = ? "/>
+        </security:authentication-provider>
+    </security:authentication-manager>
+        
+</beans>

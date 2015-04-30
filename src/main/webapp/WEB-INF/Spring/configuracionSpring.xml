@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+          http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+          http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd 
+">
+
+    <!---->
+    <mvc:annotation-driven />
+    <!---->
+    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+    
+    <context:annotation-config />
+    <context:component-scan base-package="com.sow.jordan.controladores" />
+    
+    <!--Se crea un objeto local-->
+    <bean id="controladorLocal" class="com.sow.jordan.controladores.ControladorLocal" scope="session">
+        <property name="local" >
+            <bean class="com.sow.jordan.modelos.Local">
+                <property name="nombre" value="" />
+            </bean>
+        </property>
+    </bean>
+    
+    <bean id="controladorUsuario" class="com.sow.jordan.controladores.ControladorUsuario" scope="session">
+        <property name="usuario" >
+            <bean class="com.sow.jordan.modelos.Usuario">
+                <property name="activo" value="TRUE" />
+                <property name="privilegio" value="ROLE_USER"/>
+                <!--property name="privilegio" value="ROLE_ADMIN"/-->
+                <!--property name="privilegio" value="ROLE_ROOT"/-->
+            </bean>
+        </property>
+    </bean>
+    
+    <!--Servicios-->
+    <bean id="servicioLocal" class="com.sow.jordan.servicios.implementacion.ServicioLocalImplementacion" />
+    <bean id="servicioUsuario" class="com.sow.jordan.servicios.implementacion.ServicioUsuarioImplementacion" />
+    
+    <!--Base de datos-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+        <property name="driverClass" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:/home/olivos/Documentos/SistemaJordan/jordan/BaseDeDatos"/>
+        <!--property name="url" value="jdbc:h2:F:\Documentos\BasesDatos\BaseDeDatos"/-->
+        <property name="username"  value="sa"/>
+        <property name="password" value=""/>
+    </bean>
+    
+    <!--EntityManager-->
+    <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" /> 
+        </property>
+        <property name="packagesToScan" value="com.sow.jordan.modelos"/> 
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+                <prop key="hibernate.max_fetch_depth">3</prop>
+                <prop key="hibernate.jdbc.fetch_size">50</prop>
+                <prop key="hibernate.jdbc.batch_size">10</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>  
+                <!--prop key="hibernate.hbm2ddl.auto">update</prop-->
+                <prop key="hibernate.hbm2ddl.auto">create</prop>   
+            </props>
+        </property> 
+    </bean>
+    
+    <!--Transaction Manager -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="emf"/>
+    </bean>
+       
+    <jpa:repositories base-package="com.sow.jordan.repositorios" 
+                      entity-manager-factory-ref="emf" 
+                      transaction-manager-ref="transactionManager"/>
+    
+</beans>
