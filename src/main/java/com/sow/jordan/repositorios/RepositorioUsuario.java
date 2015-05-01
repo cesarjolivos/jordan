@@ -32,4 +32,12 @@ public interface RepositorioUsuario extends CrudRepository<Usuario, String>{
     @Query("SELECT usuario FROM Usuario usuario WHERE usuario.usuario = ?")
     Usuario buscarUsuario(String usuario);
    
+    /**
+     * Método que busca un usuario mediante su correo electrónico.
+     * @param correo El correo del usuario.
+     * @return Una lista con la información.
+     */
+    @Query("SELECT usuario FROM Usuario usuario WHERE usuario.correo = ?")
+    List<Usuario> buscarPorCorreo(String correo);
+    
 }

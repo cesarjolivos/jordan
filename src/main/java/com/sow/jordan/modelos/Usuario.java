@@ -4,8 +4,11 @@
 package com.sow.jordan.modelos;
 
 import java.io.Serializable;
+import java.security.*;
 import java.util.List;
 import java.util.Objects;
+import javax.crypto.*;
+import javax.crypto.spec.SecretKeySpec;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -56,6 +59,11 @@ public class Usuario implements Serializable {
     private Boolean activo;
     
     /**
+     * 
+     */
+    private byte[] cifrado;
+    
+    /**
      * Variable que almacena los comentarios que a realizado el usuario.
      */
     @OneToMany(fetch = FetchType.EAGER,
@@ -77,7 +85,18 @@ public class Usuario implements Serializable {
     }
 
     public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
+        String llaveSimetrica = "holamundocruel12";
+        SecretKeySpec key = new SecretKeySpec(llaveSimetrica.getBytes(), "AES");
+        Cipher cipher;
+        try {
+            cipher = Cipher.getInstance("AES");
+            cipher.init(Cipher.ENCRYPT_MODE, key);
+            byte[] campoCifrado = cipher.doFinal(contraseña.getBytes());
+            cifrado = campoCifrado;
+            this.contraseña = new String(campoCifrado);
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException 
+                | IllegalBlockSizeException | BadPaddingException e) {
+        }
     }
 
     public String getNombre() {
@@ -118,6 +137,14 @@ public class Usuario implements Serializable {
 
     public void setComentarios(List<Comentario> comentarios) {
         this.comentarios = comentarios;
+    }
+    
+    public byte[] getCifrado() {
+        return cifrado;
+    }
+
+    public void setCifrado(byte[] cifrado) {
+        this.cifrado = cifrado;
     }
 
     @Override

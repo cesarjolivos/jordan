@@ -39,4 +39,11 @@ public interface ServicioUsuario {
      */
     Usuario buscarUsuario(String usuario);
     
+    /**
+     * Método que busca un usuario mediante su correo electrónico.
+     * @param correo El correo del usuario.
+     * @return Una lista con la información.
+     */
+    List<Usuario> buscarPorCorreo(String correo);
+    
 }

@@ -11,7 +11,10 @@ Pagina principal del sistema Jordan.
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <ui:composition template="/Plantillas/user.xhtml">
         <ui:define name="content">
-            
+            <p:dataTable value="#{controladorUsuario.usuarios}" var="_usuario" >
+                <p:column>#{_usuario.nombre}</p:column>
+                <p:column>#{_usuario.contraseña}</p:column>
+            </p:dataTable>
         </ui:define>
     </ui:composition>
 </html>

@@ -57,4 +57,14 @@ public class ServicioUsuarioImplementacion implements ServicioUsuario {
         return repositorioUsuario.buscarUsuario(usuario);
     }
     
+    /**
+     * Método que busca un usuario mediante su correo electrónico.
+     * @param correo El correo del usuario.
+     * @return Una lista con la información.
+     */
+    @Override
+    public List<Usuario> buscarPorCorreo(String correo){
+        return repositorioUsuario.buscarPorCorreo(correo);
+    }
+    
 }
