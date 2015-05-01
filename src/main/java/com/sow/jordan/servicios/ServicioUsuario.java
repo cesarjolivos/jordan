@@ -9,7 +9,6 @@ import java.util.List;
 /**
  * Interfaz de los servicios de los usuarios.
  * @author GARCÍA CASTRO HÉCTOR JAVIER
- * @author LARA RAMÍREZ JOSÉ JAVIER
  * @author OLIVOS NAVARRO CESAR JONATHAN
  * @author VILLEGAS MORENO ZEUXIS DANIEL
  */

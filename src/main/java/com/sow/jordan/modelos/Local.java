@@ -14,7 +14,6 @@ import sun.misc.BASE64Encoder;
  * Clase almacena la información de un local, crea una tabla para guardar 
  * la información en la base de datos.
  * @author GARCÍA CASTRO HÉCTOR JAVIER
- * @author LARA RAMÍREZ JOSÉ JAVIER
  * @author OLIVOS NAVARRO CESAR JONATHAN
  * @author VILLEGAS MORENO ZEUXIS DANIEL
  */

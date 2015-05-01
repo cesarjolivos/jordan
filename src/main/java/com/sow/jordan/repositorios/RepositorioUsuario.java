@@ -12,7 +12,6 @@ import org.springframework.data.repository.CrudRepository;
 /**
  * Interfaz que contiene las consultas a la base de datos.
  * @author GARCÍA CASTRO HÉCTOR JAVIER
- * @author LARA RAMÍREZ JOSÉ JAVIER
  * @author OLIVOS NAVARRO CESAR JONATHAN
  * @author VILLEGAS MORENO ZEUXIS DANIEL
  */

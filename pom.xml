@@ -161,6 +161,24 @@
             <artifactId>commons-io</artifactId>
             <version>1.4</version>
         </dependency>
+        <!--Uso del correo-->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>mail</artifactId>
+            <version>1.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>3.2.2.RELEASE</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>3.2.8.RELEASE</version>
+            <type>jar</type>
+        </dependency>
         <!--Fin de las dependencias agregadas -->
     </dependencies>
 

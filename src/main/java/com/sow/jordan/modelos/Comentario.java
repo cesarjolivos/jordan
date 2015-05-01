@@ -11,7 +11,6 @@ import javax.persistence.*;
  * Clase almacena la información de los comentarios, crea una tabla para guardar
  * la información en la base de datos.
  * @author GARCÍA CASTRO HÉCTOR JAVIER
- * @author LARA RAMÍREZ JOSÉ JAVIER
  * @author OLIVOS NAVARRO CESAR JONATHAN
  * @author VILLEGAS MORENO ZEUXIS DANIEL
  */

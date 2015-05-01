@@ -14,7 +14,6 @@ import javax.servlet.ServletResponse;
  * Clase se encarga de conectar las vistas con los modelos del sistema, conecta
  * los locales y clases relacionadas con las vistas.
  * @author GARCÍA CASTRO HÉCTOR JAVIER
- * @author LARA RAMÍREZ JOSÉ JAVIER
  * @author OLIVOS NAVARRO CESAR JONATHAN
  * @author VILLEGAS MORENO ZEUXIS DANIEL
  */

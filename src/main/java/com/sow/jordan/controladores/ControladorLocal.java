@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
  * Clase se encarga de conectar las vistas con los modelos del sistema, conecta
  * los locales y clases relacionadas con las vistas.
  * @author GARCÍA CASTRO HÉCTOR JAVIER
- * @author LARA RAMÍREZ JOSÉ JAVIER
  * @author OLIVOS NAVARRO CESAR JONATHAN
  * @author VILLEGAS MORENO ZEUXIS DANIEL
  */
@@ -24,10 +23,18 @@ import org.springframework.stereotype.Controller;
 @Scope("session")
 public class ControladorLocal implements Serializable {
     
+    /**
+     * Variable que almacela los servicios de los locales.
+     */
     @Autowired
     private ServicioLocal servicioLocal;
-    
+    /**
+     * Variable que almacena los locales del sistema
+     */
     private List<Local> locales;
+    /**
+     * Variable que alamacena un local.
+     */
     private Local local;
     
     /**

@@ -1,0 +1,96 @@
+
+#top {
+    background: -webkit-linear-gradient(white, gray); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(white, gray); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(white, gray); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(white, gray); /* Standard syntax */
+}
+
+#bottom {
+    position: relative;
+    background-color: #c2dfef;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
+}
+
+#left {
+    float: left;
+    background: -webkit-linear-gradient(white, gray); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(white, gray); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(white, gray); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(white, gray); /* Standard syntax */
+    font-size: 12pt;
+    width: 20%;
+}
+
+#right {
+    float: right;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+.center_content {
+    position: relative;
+    background: -webkit-linear-gradient(white, gray); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(white, gray); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(white, gray); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(white, gray); /* Standard syntax */
+    padding: 5px;
+}
+
+.left_content {
+    background: -webkit-linear-gradient(white, gray); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(white, gray); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(white, gray); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(white, gray); /* Standard syntax */
+    font-size: 14pt;
+    margin-left: 20%;
+    padding: 5px;
+}
+
+.right_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin: 0px 170px 0px 170px;
+}
+
+#top a:link, #top a:visited {
+    color: black;
+    font-weight : bold;
+    text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+    color: black;
+    font-weight : bold;
+    text-decoration : underline;
+}
+
+.botones{
+    width:400px;
+    height:150px;
+    font-size: 25px;
+}
+
+.centrado.ui-menubar, .centrado.selectOneRadio {
+    text-align: center;
+    font-size: 15pt;
+}
+
+.centrado .ui-menu-list {
+    display: inline-block;
+}
+
+.liga{
+    color: blue;
+}
+
+#grid.selectItem {
+    background-color: red;
+    margin: 100pt;
+}
+
+.alignTop {
+    vertical-align: top;
+}

@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 /**
  * Clase que almacena la información de los usuarios del sistema.
  * @author GARCÍA CASTRO HÉCTOR JAVIER
- * @author LARA RAMÍREZ JOSÉ JAVIER
  * @author OLIVOS NAVARRO CESAR JONATHAN
  * @author VILLEGAS MORENO ZEUXIS DANIEL
  */

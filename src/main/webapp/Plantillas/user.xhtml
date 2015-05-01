@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <title>Jordan-User</title>
+    </h:head>
+    <h:body>
+        <div id="top" class="top">
+            <ui:insert name="top">
+                
+                <h:form>
+                    <p:menubar styleClass="centrado">
+                        <p:menuitem value="INICIO" url="../jordan" style="margin: 10pt"/>
+                        <p:menuitem>
+                            <p:selectOneMenu value="elige" style="margin: 7pt">
+                                <f:selectItem itemLabel="Categoría de Búsqueda" itemValue=""/>
+                                <f:selectItem itemLabel="Comida" itemValue="Comida" />
+                                <f:selectItem itemLabel="Local" itemValue="Local" />
+                                <f:selectItem itemLabel="Lugar" itemValue="Lugar" />
+                            </p:selectOneMenu>
+                        </p:menuitem>
+                        <p:menuitem>
+                            <p:inputText placeholder="Buscqueda" style="margin: 5pt;margin-right: 0pt"/>
+                            <p:button icon="ui-icon-search" title="Buscar" style="margin: 5pt; margin-left: 0pt"/>
+                        </p:menuitem>
+                        <p:menuitem rendered="#{!controladorSesión.sesionIniciada}">
+                            <p:commandButton icon="ui-icon-key" onclick="PF('logeo').show();"
+                                             style="margin: 5pt" title="Iniciar Sesión" value="Iniciar Sesión"/>
+                        </p:menuitem>
+                    </p:menubar>
+                </h:form>
+                
+                <h:form id="busquedaAbanzada">
+                    <p:accordionPanel activeIndex="-1" style="font-size: 15pt">
+                        <p:tab id="titulo" title="Busqueda Avanzada" >
+                            <p:selectManyCheckbox layout="grid" columns="3" style="font-size: 150pt">
+                                <p:selectBooleanCheckbox itemLabel="Wi-Fi" value="Wi-Fi" style="margin: 15pt;font-size: 15pt"/>
+                                <p:selectBooleanCheckbox itemLabel="Metro" value="Metro" style="margin: 15pt;font-size: 15pt"/>
+                                <p:selectBooleanCheckbox itemLabel="Para Comer" value="Para Comer" style="margin: 15pt;font-size: 15pt"/>
+                                <p:selectBooleanCheckbox itemLabel="Baño" value="Baño" style="margin: 15pt;font-size: 15pt"/>
+                                <p:selectBooleanCheckbox itemLabel="Metrobús" value="Metrobús" style="margin: 15pt;font-size: 15pt"/>
+                                <p:selectBooleanCheckbox itemLabel="Para Llevar" value="Para Llear" style="margin: 15pt;font-size: 15pt"/>
+                                <p:selectBooleanCheckbox itemLabel="Estacionamiento" value="Estacionamiento" style="margin: 15pt;font-size: 15pt"/>
+                                <p:selectBooleanCheckbox itemLabel="Pumabús" value="Pumabús" style="margin: 15pt;font-size: 15pt"/>
+                                <p:selectBooleanCheckbox itemLabel="Bicipuma" value="Bicipuma" style="margin: 15pt;font-size: 15pt"/>
+                            </p:selectManyCheckbox>
+                            <p:commandButton icon="ui-icon-search" value="Buscar" style="font-size: 15pt; alignment-adjust: central"/>
+                        </p:tab>
+                    </p:accordionPanel>
+                </h:form>
+                
+                <form id="iniciarSesion" action="#{facesContext.externalContext.requestContextPath}/j_spring_security_check" method="POST">
+                    <p:dialog header="INICIAR SESIÓN" widgetVar="logeo" modal="true" 
+                              closable="true"> <br/>
+                        <div align="center">
+                            <input type="text" name="j_username" placeholder="Usuario"/><br/><br/><br/>
+                            <input type="password" name="j_password" placeholder="Contraseña"/><br/><br/><br/>
+                            <input name="submit" type="submit" value="Entrar"/><br/><br/>
+                            <p:commandLink value="Recuperar Contraseña" style="color: cornflowerblue"
+                                           onclick="PF('recuperar').show();PF('logeo').hide();"/><br/><br/>
+                            <p:commandLink value="Registrarse" style="color: cornflowerblue" onclick="PF('registro').show();PF('logeo').hide();"/>
+                            <br/><br/>
+                        </div>
+                    </p:dialog>
+                </form>
+                
+                <script>
+                    var error = window.location.search;
+                    if (error == '?error=logeo'){
+                        $(document).ready(function (){PF('logeo').show();})
+                    }
+                </script>
+                
+                <h:form id="agregarUsuarios">
+                    <p:dialog header="REGISTRAR" widgetVar="registro"  
+                              modal="true" > <br/>
+                        <div align="center">
+                            <p:inputText placeholder="Nombre Completo" required="true"
+                                         value="#{controladorUsuario.usuario.nombre}" />
+                            <br/><br/>
+                            <p:inputText placeholder="Usuario" required="true"
+                                         value="#{controladorUsuario.usuario.usuario}" />
+                            <br/><br/>
+                            <p:inputText id="correo" placeholder="Correo" required="true"
+                                         value="#{controladorUsuario.usuario.correo}" 
+                                         validatorMessage="Correo invalido"
+                                         requiredMessage="Por favor ingresa tu correo">
+                                <f:validateRegex
+                                    pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                <p:ajax update="msgLastname" event="keyup" />
+                            </p:inputText>
+                            <p:watermark for="correo" value="Correo" />
+                            <p:message for="correo" id="msgLastname"/>
+                            <br/><br/>
+                            <p:password id="pass" placeholder="contraseña" match="confirmacion" 
+                                        label="contarseña" required="true"
+                                        value="#{controladorUsuario.usuario.contraseña}" />
+                            <br/><br/>
+                            <p:password id="confirmacion" placeholder="Confirmar Contraseña" 
+                                        label="confirmación" required="true"
+                                        value="#{controladorUsuario.usuario.contraseña}"/>
+                            <br/><br/>
+                            <p:commandButton ajax="false" actionListener="#{controladorUsuario.guardarUsuario()}" 
+                                             value = "Registrarse" update=":usuarios @form"/>
+                        </div>
+                    </p:dialog>
+                </h:form>
+
+                
+            </ui:insert>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">
+                
+            </ui:insert>
+        </div>
+    </h:body>
+</html>

@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Clase que implementa los servicios de local.
  * @author GARCÍA CASTRO HÉCTOR JAVIER
- * @author LARA RAMÍREZ JOSÉ JAVIER
  * @author OLIVOS NAVARRO CESAR JONATHAN
  * @author VILLEGAS MORENO ZEUXIS DANIEL
  */
