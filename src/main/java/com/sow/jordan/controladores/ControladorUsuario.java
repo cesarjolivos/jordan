@@ -39,6 +39,11 @@ public class ControladorUsuario implements Serializable {
     @Autowired
     private ServicioUsuario servicioUsuario;
     /**
+     *
+     */
+    @Autowired
+    private JavaMailSenderImpl mailSender;
+    /**
      * Variable que almacena un usuario.
      */
     private List<Usuario> usuarios;
@@ -46,10 +51,6 @@ public class ControladorUsuario implements Serializable {
      * Variable que almacena los usuarios del sistema.
      */
     private Usuario usuario;
-    /**
-     *
-     */
-    private JavaMailSenderImpl mailSender;
     
     /**
      * Método que se ejecuta después de realizar la inyección de dependencias.
@@ -65,6 +66,7 @@ public class ControladorUsuario implements Serializable {
     public void guardarUsuario(){
         servicioUsuario.guardarUsuario(usuario);
         usuarios =servicioUsuario.cargarUsuarios();
+        usuario = new Usuario();
     }
     
     /**

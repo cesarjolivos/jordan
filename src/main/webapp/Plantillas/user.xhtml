@@ -78,6 +78,28 @@
                         $(document).ready(function (){PF('logeo').show();})
                     }
                 </script>
+
+                <h:form id="recuperrarContraseña">
+                    <p:dialog header="RECUPERAR CONTRASEÑA" widgetVar="recuperar" modal="true"
+                              closable="true"> <br/>
+                        <div align="center">
+                            <p:inputText id="correo" placeholder="Correo del usuario" required="true"
+                                         value="#{controladorUsuario.usuario.correo}" 
+                                         validatorMessage="Correo invalido"
+                                         requiredMessage="Por favor ingresa tu correo">
+                                <f:validateRegex
+                                    pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                <p:ajax update="msgLastname" event="keyup" />
+                            </p:inputText>
+                            <p:watermark for="correo" value="Correo" />
+                            <p:message for="correo" id="msgLastname"/>
+                            <br/><br/>
+                            <p:commandButton ajax="false" actionListener="#{controladorUsuario.enviarContraseña()}" 
+                                             value = "Recuperar Contraseña" update="growl"/>
+                            <br/><br/>
+                        </div>
+                    </p:dialog>
+                </h:form>
                 
                 <h:form id="agregarUsuarios">
                     <p:dialog header="REGISTRAR" widgetVar="registro"  
@@ -113,7 +135,6 @@
                         </div>
                     </p:dialog>
                 </h:form>
-
                 
             </ui:insert>
         </div>
