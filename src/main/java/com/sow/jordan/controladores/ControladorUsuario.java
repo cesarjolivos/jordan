@@ -73,6 +73,7 @@ public class ControladorUsuario implements Serializable {
      * Método que recupera la contraseña y la enviá por correo electrónico.
      */
     public void enviarContraseña() {
+        /**
         String llaveSimetrica = "holamundocruel12";
         SecretKeySpec key = new SecretKeySpec(llaveSimetrica.getBytes(), "AES");
         Cipher cipher;
@@ -101,6 +102,26 @@ public class ControladorUsuario implements Serializable {
                         InvalidKeyException | IllegalBlockSizeException |
                         BadPaddingException e) {
                     addMessage("No se pudo desencriptar");
+                }
+            }
+        } else {
+            addMessage("El correo que proporcionaste no existe en el registro");
+        }*/
+        SimpleMailMessage mail = new SimpleMailMessage();
+        if (this.usuarios.isEmpty() == false) {
+            for (Usuario u : this.usuarios) {
+                String contrasenia = u.getContraseña();
+                mail.setTo(u.getCorreo());
+                mail.setFrom("jordan.dantm@gmail.com");
+                mail.setSubject("JORDAN");
+                mail.setText("RECUPERACION DE CONTRASEÑA\n\n\n" + "Hola "
+                        + u.getNombre() + " tu contraseña es: " + contrasenia);
+                try {
+                    mailSender.send(mail);
+                    addMessage("Tu contraseña ha sido enviada al correo que "
+                            + "proporcionaste");
+                } catch (MailException ex) {
+                    addMessage("No se pudo enviar el mensaje");
                 }
             }
         } else {

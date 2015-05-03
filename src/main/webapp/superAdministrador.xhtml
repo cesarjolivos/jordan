@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Pagina que muestra la información de un local.
+-->    
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/Plantillas/admin.xhtml">
+        <ui:define name="content">
+            
+            <h:form id="agregar" style="text-align: center" >
+                <p:commandButton ajax="false" styleClass="botones"
+                                 type="button" value="Agregar Establecimiento" 
+                                 onclick="PF('agregarEstablecimiento').show();"/> 
+                <br/><br/>
+                <p:commandButton ajax="false" styleClass="botones"
+                                 type="button" value="Eliminar Establecimiento" 
+                                 onclick="PF('eliminarEstablecimiento').show();"/>
+                <br/><br/>
+                <p:commandButton ajax="false" styleClass="botones"
+                                 type="button" value="Eliminar Usuario" 
+                                 onclick="PF('eliminarUsuario').show();"/>
+                <br/><br/>
+                <p:commandButton ajax="false" styleClass="botones"
+                                 type="button" value="Otorgar Privilegios de Administrador" 
+                                 onclick="PF('agregarPrivilegios').show();"/>
+                <br/><br/>
+                <p:commandButton ajax="false" styleClass="botones"
+                                 type="button" value="Retirar Privilegios a un Administrador" 
+                                 onclick="PF('retirarPrivilegios').show();"/>
+                <br/><br/>
+            </h:form>
+            
+        </ui:define>
+    </ui:composition>
+</html>

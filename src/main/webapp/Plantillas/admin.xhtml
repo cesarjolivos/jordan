@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <title>Jordan-Administración</title>
+    </h:head>
+    <h:body>
+        <div id="top" class="top">
+            <ui:insert name="top">
+
+                <h:form id="busqueda">
+                    <p:menubar styleClass="centrado">
+                        <p:menuitem value="INICIO" url="../jordan/index.xhtml"
+                                    style="margin-right: 20pt; color: black; font-size: 20pt; float: left" />
+                        <p:menuitem 
+                            value="Cerrar Sesión" 
+                            style="margin-right: 20pt; color: black; font-size: 20pt; float: left"
+                            url="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout"/>
+                    </p:menubar>
+                </h:form>
+
+            </ui:insert>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">
+
+            </ui:insert>
+        </div>
+    </h:body>
+</html>

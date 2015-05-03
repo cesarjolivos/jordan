@@ -27,48 +27,66 @@ public class Local implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     /**
      * Variable que almacena el nombre del local, dicho valor no puede ser nulo.
      */
     @NotNull
     private String nombre;
-
     /**
      * Variable que almacena el Alias del local.
      */
     private String sobrenombre;
-    
     /**
      * Variable que almacena la latitud del local.
      */
     @NotNull
     private Double latitud;
-
     /**
      * Variable que almacena la longitud del local.
      */
     @NotNull
     private Double longitud;
-
     /**
      * Variable que almacena la especialidad del local.
      */
     private String especialidad;
-
     /**
      * Variable que almacena la descripción del local.
      */
     private String descripción;
-    
     /**
      * Variable que almacena una imagen.
      */
     @Lob
     @Column(name = "imagen", columnDefinition = "LONGBLOB")
     @Basic(fetch = FetchType.LAZY)
-    private byte[] imagen;
-    
+    private byte[] imagen;  
+    /**
+     * Variable que almecena el lugar en el que se encuentra ubicado el local.
+     */
+    @ManyToOne
+    private Lugar lugar;
+     /**
+     * Variable que almacena la referencia a los servicios del local.
+     */
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Servicio> servicios;
+    /**
+     * Variable que almacena la referencia los menús del local.
+     */
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            mappedBy = "local",
+            orphanRemoval = true)
+    private List<Menú> menú;
+    /**
+     * Variable que almacena la referencia a los transportes sercanos al local.
+     */
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            mappedBy = "local",
+            orphanRemoval = true)
+    private List<Transporte> transportes;
     /**
      * Variable que almacena los comentarios que tiene el local.
      */
@@ -77,7 +95,6 @@ public class Local implements Serializable {
             mappedBy = "usuario",
             orphanRemoval = true)
     private  List<Comentario> comentarios;
-    
     /**
      * Variable que almacena la calificación promedio que tiene el local.
      */
@@ -93,7 +110,7 @@ public class Local implements Serializable {
 
     /**
      * Método que asigna un nuevo id a un local.
-     * @param id El nuevo id
+     * @param id El nuevo id.
      */
     public void setId(Integer id) {
         this.id = id;
@@ -212,6 +229,102 @@ public class Local implements Serializable {
     }
     
     /**
+     * Método que regresa el lugar donde se encuentra el local.
+     * @return Un lugar.
+     */
+    public Lugar getLugar() {
+        return lugar;
+    }
+
+    /**
+     * Método que asigna un nuevo lugar al local.
+     * @param lugar Un lugar.
+     */
+    public void setLugar(Lugar lugar) {
+        this.lugar = lugar;
+    }
+    
+    /**
+     * Método que regresa los servicios con los que cuenta el local.
+     * @return Una lista con los servicios.
+     */
+    public List<Servicio> getServicios() {
+        return servicios;
+    }
+
+    /**
+     * Método que asigna un nuevo servicio.
+     * @param servicios El nuevo servicio.
+     */
+    public void setServicios(List<Servicio> servicios) {
+        this.servicios = servicios;
+    }
+    
+    /**
+     * Método que regresa una lista con los menús.
+     * @return Una lista con la información.
+     */
+    public List<Menú> getMenú() {
+        return menú;
+    }
+
+    /**
+     * Método para establecer un nuevo menú.
+     * @param menú El nuevo menú.
+     */
+    public void setMenú(List<Menú> menú) {
+        this.menú = menú;
+    }
+    
+    /**
+     * Método que regresa los transportes mas sercarnos al local.
+     * @return Una lista con la información.
+     */
+    public List<Transporte> getTransportes() {
+        return transportes;
+    }
+
+    /**
+     * Método que establece un nuevo transporte.
+     * @param transportes El nuevo transporte.
+     */
+    public void setTransportes(List<Transporte> transportes) {
+        this.transportes = transportes;
+    }
+
+    /**
+     * Método que regresa los comentrarios que tiene el local.
+     * @return Una lista con la información.
+     */
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    /**
+     * Método que asigna un nuevo comentario al local.
+     * @param comentarios La lista actualizada.
+     */
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
+    }
+    
+    /**
+     * Método que regresa la calificaron promedio del local.
+     * @return Un double con la información.
+     */
+    public double getCalificación() {
+        return calificación;
+    }
+
+    /**
+     * Método asigna la calificación promedio.
+     * @param calificación La nueva calificación del local.
+     */
+    public void setCalificación(double calificación) {
+        this.calificación = calificación;
+    }
+    
+    /**
      * Método que regresa una cadena con la información de la imagen, para 
      * que pueda ser representada en la pagina.
      * @return Una cadena con la información.
@@ -226,22 +339,6 @@ public class Local implements Serializable {
         }
     }
     
-    /**
-     * Método que regresa la calificaron promedio del local.
-     * @return Un double con la información.
-     */
-    public int getCalificación() {
-        return (int) calificación;
-    }
-
-    /**
-     * Método asigna la calificación promedio.
-     * @param calificación La nueva calificación del local.
-     */
-    public void setCalificación(double calificación) {
-        this.calificación = calificación;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;

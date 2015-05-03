@@ -25,65 +25,100 @@ public class Comentario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     /**
      * Variable que almacena el comentario.
      */
     private String comentario;
-
     /**
      * Variable que almacena la calificación otorgada.
      */
     private Integer calificación;
-
     /**
      * Variable que almacena la referencia al local.
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Local local;
-
     /**
      * Variable que almacena la referencia al usuario.
      */
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Usuario usuario;
 
+    /**
+     * Método que regresa el id del comentario.
+     * @return Un entero con la información.
+     */
     public Integer getId() {
         return id;
     }
 
+    /**
+     * Método que asigna un nuevo id a un comentario.
+     * @param id El nuevo id.
+     */
     public void setId(Integer id) {
         this.id = id;
     }
-
+    /**
+     * Método que regresa el comentario.
+     * @return Una cadena con la información.
+     */
     public String getComentario() {
         return comentario;
     }
 
+    /**
+     * Método que asigna un nuevo comentario.
+     * @param comentario El nuevo comentario.
+     */
     public void setComentario(String comentario) {
         this.comentario = comentario;
     }
 
+    /**
+     * Método que regresa la calificación otorgada.
+     * @return Un entero con la información.
+     */
     public Integer getCalificación() {
         return calificación;
     }
 
+    /**
+     * Método que asigna una nueva calificación.
+     * @param calificación 
+     */
     public void setCalificación(Integer calificación) {
         this.calificación = calificación;
     }
 
+    /**
+     * Método que regresa el local del que proviene el comentario.
+     * @return Un local.
+     */
     public Local getLocal() {
         return local;
     }
 
+    /**
+     * Método que asigna un nuevo local.
+     * @param local El nuevo local.
+     */
     public void setLocal(Local local) {
         this.local = local;
     }
 
+    /**
+     * Método que regresa el usuario que publico el comentario.
+     * @return Un usuario.
+     */
     public Usuario getUsuario() {
         return usuario;
     }
 
+    /**
+     * Método que asigna un nuevo usuario.
+     * @param usuario El nuevo usuario.
+     */
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }

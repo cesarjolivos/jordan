@@ -35,6 +35,18 @@
                             <p:commandButton icon="ui-icon-key" onclick="PF('logeo').show();"
                                              style="margin: 5pt" title="Iniciar Sesión" value="Iniciar Sesión"/>
                         </p:menuitem>
+                        <p:menuitem rendered="#{controladorSesión.sesionIniciada}">
+                            <h:panelGrid columns="3" style="margin: 5pt">
+                                <h:link outcome="#{controladorSesión.url()}" value="#{controladorSesión.usuario.nombre}" />
+                                <!--p:commandLink action="{controladorSesión.url()}" value="{controladorSesión.usuario.nombre}" /-->
+                                <form action="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout" method="POST">
+                                </form>
+                                <form action="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout" method="POST">
+                                    <input name="submit" type="submit" value="Cerrar Sesión"
+                                           style="margin: 5pt" />
+                                </form>
+                            </h:panelGrid>
+                        </p:menuitem>
                     </p:menubar>
                 </h:form>
                 
@@ -94,8 +106,9 @@
                             <p:watermark for="correo" value="Correo" />
                             <p:message for="correo" id="msgLastname"/>
                             <br/><br/>
+                            <p:growl id="mensaje" life="5000" />
                             <p:commandButton ajax="false" actionListener="#{controladorUsuario.enviarContraseña()}" 
-                                             value = "Recuperar Contraseña" update="growl"/>
+                                             value = "Recuperar Contraseña" update="mensaje"/>
                             <br/><br/>
                         </div>
                     </p:dialog>

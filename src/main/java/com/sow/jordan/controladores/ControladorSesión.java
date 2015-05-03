@@ -89,5 +89,9 @@ public class ControladorSesión implements Serializable {
     public boolean getSesionIniciada() {
         return sesionIniciada;
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
     
 }

@@ -34,9 +34,9 @@
         <property name="usuario" >
             <bean class="com.sow.jordan.modelos.Usuario">
                 <property name="activo" value="TRUE" />
-                <property name="privilegio" value="ROLE_USER"/>
+                <!--property name="privilegio" value="ROLE_USER"/-->
                 <!--property name="privilegio" value="ROLE_ADMIN"/-->
-                <!--property name="privilegio" value="ROLE_ROOT"/-->
+                <property name="privilegio" value="ROLE_ROOT"/>
             </bean>
         </property>
     </bean>
@@ -45,7 +45,7 @@
         <property name="host" value="smtp.gmail.com"/>
         <property name="port" value="587"/>
         <property name="username" value="jordan.dantm@gmail.com"/>
-        <property name="password" value="pxljhdsrrynqscgj"/> <!--pxljhdsrrynqscgj-->
+        <property name="password" value="pxljhdsrrynqscgj"/>
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.transport.protocol">smtp</prop>
