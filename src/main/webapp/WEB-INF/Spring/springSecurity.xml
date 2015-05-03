@@ -15,7 +15,7 @@
     <security:http auto-config="true">
         <security:intercept-url pattern="/administrador.xhtml" access="ROLE_ADMIN,ROLE_ROOT" />
         <security:intercept-url pattern="/superAdministrador.xhtml" access="ROLE_ROOT" />
-        <security:intercept-url pattern="/agregarDatos" access="ROLE_ROOT"/>
+        <security:intercept-url pattern="/agregarDatos.xhtml" access="ROLE_ROOT"/>
         <security:form-login login-page="/index.xhtml?error=logeo"/> 
     </security:http>
     

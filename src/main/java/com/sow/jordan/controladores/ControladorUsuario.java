@@ -6,15 +6,15 @@ package com.sow.jordan.controladores;
 import com.sow.jordan.modelos.Usuario;
 import com.sow.jordan.servicios.ServicioUsuario;
 import java.io.Serializable;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
+/**
+import java.security.*;
+*/
 import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.crypto.BadPaddingException;
-import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
+/**
+import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
+*/
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,26 +131,50 @@ public class ControladorUsuario implements Serializable {
 
     /**
      * Método que agrega un mensaje al enviar la contraseña.
-     *
      * @param summary El mensaje.
      */
     public void addMessage(String summary) {
         FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
+    
+    /**
+     * Método que elimina un usuario del sistema.
+     * @param usuario El usuario a aliminar.
+     */
+    public void eliminarUsuario(Usuario usuario){
+        this.servicioUsuario.eliminarUsuario(usuario);
+        usuarios = servicioUsuario.cargarUsuarios();
+    }
 
+    /**
+     * Método que regresa los usuarios del sistema.
+     * @return Una lista con la información.
+     */
     public List<Usuario> getUsuarios() {
         return usuarios;
     }
 
+    /**
+     * Método que agrega un usuario al sistema.
+     * @param usuarios La lsita actualizada.
+     */
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
     }
 
+    /**
+     * Método que regresa un usuario.
+     * @return Un usuario.
+     */
     public Usuario getUsuario() {
         return usuario;
     }
 
+    /**
+     * Método que asigna un usuario.
+     * @param usuario El usuario a asignar.
+     */
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }

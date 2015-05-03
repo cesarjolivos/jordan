@@ -12,7 +12,6 @@ import sun.misc.BASE64Encoder;
  * Clase que servirá como un catalogo que muestra los servicios que brinda 
  * un lical, crea una tabla para almacenar la información en la base de datos.
  * @author GARCÍA CASTRO HÉCTOR JAVIER
- * @author LARA RAMÍREZ JOSÉ JAVIER
  * @author OLIVOS NAVARRO CESAR JONATHAN
  * @author VILLEGAS MORENO ZEUXIS DANIEL
  */

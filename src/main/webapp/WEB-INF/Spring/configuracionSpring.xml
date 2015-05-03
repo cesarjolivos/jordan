@@ -34,9 +34,9 @@
         <property name="usuario" >
             <bean class="com.sow.jordan.modelos.Usuario">
                 <property name="activo" value="TRUE" />
-                <!--property name="privilegio" value="ROLE_USER"/-->
+                <property name="privilegio" value="ROLE_USER"/>
                 <!--property name="privilegio" value="ROLE_ADMIN"/-->
-                <property name="privilegio" value="ROLE_ROOT"/>
+                <!--property name="privilegio" value="ROLE_ROOT"/-->
             </bean>
         </property>
     </bean>
@@ -84,8 +84,8 @@
                 <prop key="hibernate.jdbc.batch_size">10</prop>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>  
-                <!--prop key="hibernate.hbm2ddl.auto">update</prop-->
-                <prop key="hibernate.hbm2ddl.auto">create</prop>   
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <!--prop key="hibernate.hbm2ddl.auto">create</prop-->   
             </props>
         </property> 
     </bean>

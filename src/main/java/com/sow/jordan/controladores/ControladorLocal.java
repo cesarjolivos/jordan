@@ -3,11 +3,16 @@
  */
 package com.sow.jordan.controladores;
 
-import com.sow.jordan.modelos.Local;
+import com.sow.jordan.modelos.*;
 import com.sow.jordan.servicios.ServicioLocal;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
+import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.MapModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -36,13 +41,367 @@ public class ControladorLocal implements Serializable {
      * Variable que alamacena un local.
      */
     private Local local;
+    /**
+     * Variable que alamacena el catalogo de los lugares que hay en el sistema.
+     */
+    private List<Lugar> lugares;
+    /**
+     * Variable que almacena un lugar.
+     */
+    private Lugar lugar;
+    /**
+     * Variable que almacena el mapa.
+     */
+    private MapModel mapa;
+    /**
+     * Variable que almacena el catalogo de los servicios que hay en los locales.
+     */
+    private List<Servicio> servicios;
+    /**
+     * Variable que alamcena un servicio.
+     */
+    private Servicio servicio;
+    /**
+     * Variable que almacena un menú.
+     */
+    private Menú menú;
+    /**
+     * Variable que alamacena el catalogo de los transportes que hay en cu
+     */
+    private List<Transporte> transportes;
+    /**
+     * Variable que almacena un transporte.
+     */
+    private Transporte transporte;
+    /**
+     * Variables auxiliares.
+     */
+    private int idLugar;//indica el id del lugar seleccionado.
+    private int idTransporte;//indica el id del transporte seleccionado.
+    private String tipo;//indica el tipo de transporte seleccionado.
     
     /**
      * Método que se ejecuta después de realizar la inyección de dependencias.
      */
     @PostConstruct
     public void inicio(){
+        lugares = servicioLocal.cargarLugares();
+        servicios = servicioLocal.cargarServicios();
+        transportes = servicioLocal.cargarTransportes();
         locales = servicioLocal.cargarLocales();
+        local.setMenú(new ArrayList<Menú>());
+        local.setTransportes(new ArrayList<Transporte>());
+        mapa = new DefaultMapModel(); 
+        lugar = new Lugar();
+        servicio = new Servicio();
+        transporte = new Transporte();
+    }
+    
+    /**
+     * Método que guarda un local en la base de datos.
+     */
+    public void guardarLocal() {
+        lugar = servicioLocal.buscarLugar(idLugar);
+        local.setLugar(lugar);
+        servicioLocal.guardarLocal(local);
+        locales = servicioLocal.cargarLocales();
+        local = new Local();
+        local.setMenú(new ArrayList<Menú>());
+        local.setTransportes(new ArrayList<Transporte>());
+    }
+    
+    /**
+     * Método que guarda los menús de un local.
+     */
+    public void guardarMenús() {
+        local.getMenú().add(menú);
+        menú = new Menú();
+    }
+    
+    /**
+     * Método que agrega un transporte a un local.
+     */
+    public void guardarTransporte() {
+        transporte = servicioLocal.buscarTransporte(idTransporte);
+        local.getTransportes().add(transporte);
+        transporte = new Transporte();
+    }
+    
+    /**
+     * Método que agrega un lugar al catalogo de lugares.
+     */
+    public void agregarLugar(){
+        servicioLocal.guardarLugar(lugar);
+        lugares = servicioLocal.cargarLugares();
+        lugar = new Lugar();
+    }
+    
+    /**
+     * Método que agrega un servicio al catalogo de servicios de los locales.
+     */
+    public void agregarServicio(){
+        servicioLocal.guardarSercivio(servicio);
+        servicios = servicioLocal.cargarServicios();
+        servicio = new Servicio();
+    }
+    
+    /**
+     * Método que agrega un transporte al catalogo de transportes de cu.
+     */
+    public void agregarTransporte(){
+        servicioLocal.guardarTransporte(transporte);
+        transportes = servicioLocal.cargarTransportes();
+        transporte = new Transporte();
+    }
+    
+    /**
+     * Método que elimina un local de la base de datos.
+     * @param local El local a eliminar.
+     */
+    public void eliminarLocal(Local local) {
+        servicioLocal.eliminarLocal(local);
+        locales = servicioLocal.cargarLocales();
+    }
+    
+    /**
+     * Método que elimina un menú de un local.
+     * @param menú El menú a aliminar.
+     */
+    public void eliminarMenú(Menú menú) {
+        this.local.getMenú().remove(menú);
+    }
+    
+    /**
+     * Método que elimina un transporte de un local.
+     * @param transporte El transporte a aliminar.
+     */
+    public void eliminarTransporte(Transporte transporte) {
+        this.local.getTransportes().remove(transporte);
+    }
+    
+    /**
+     * Método que regresa la lista de locales.
+     * @return Una lista con la información.
+     */
+    public List<Local> getLocales() {
+        return locales;
+    }
+    
+    /**
+     * Método para agregar un local a la lista.
+     * @param locales Una lista con la información.
+     */
+    public void setLocales(List<Local> locales) {
+        this.locales = locales;
+    }
+    
+    /**
+     * Método que regresa un local.
+     * @return Un local.
+     */
+    public Local getLocal() {
+        return local;
+    }
+
+    /**
+     * Método que asigna un local.
+     * @param local Un local.
+     */
+    public void setLocal(Local local) {
+        this.local = local;
+    }    
+    
+    /**
+     * Método que regresa el id del lugar seleccionado.
+     * @return Un entero con la informacion.
+     */
+    public int getIdLugar() {
+        return idLugar;
+    }
+
+    /**
+     * Método que asigna un id del lugar seleccionado.
+     * @param idLugar El id del lugar.
+     */
+    public void setIdLugar(int idLugar) {
+        this.idLugar = idLugar;
+    }
+    
+    /**
+     * Método que regresa los lugares.
+     * @return Una lista con la información.
+     */
+    public List<Lugar> getLugares() {
+        return lugares;
+    }
+    
+    /**
+     * Método que agrega un lugar.
+     * @param lugares Una lista con la información.
+     */
+    public void setLugares(List<Lugar> lugares) {
+        this.lugares = lugares;
+    }
+    
+    /**
+     * Método que regresa un lugar.
+     * @return Un lugar.
+     */
+    public Lugar getLugar() {
+        return lugar;
+    }
+
+    /**
+     * Método que asigna un nuevo lugar.
+     * @param lugar El lugar a asignar.
+     */
+    public void setLugar(Lugar lugar) {
+        this.lugar = lugar;
+    }
+    
+    /**
+     * Método que regresa los servicios de los locales.
+     * @return Una lista con la información.
+     */
+    public List<Servicio> getServicios() {
+        return servicios;
+    }
+
+    /**
+     * Método que agrega un servicio.
+     * @param servicios Una lista con la nueva información
+     */
+    public void setServicios(List<Servicio> servicios) {
+        this.servicios = servicios;
+    }
+
+    /**
+     * Método que regresa un servicio.
+     * @return Un servicio.
+     */
+    public Servicio getServicio() {
+        return servicio;
+    }
+
+    /**
+     * Método que asigna un nuevo servicio.
+     * @param servicio El nuevo servicio.
+     */
+    public void setServicio(Servicio servicio) {
+        this.servicio = servicio;
+    }
+
+    /**
+     * Método que regresa un menú.
+     * @return Un menú.
+     */
+    public Menú getMenú() {
+        return menú;
+    }
+
+    /**
+     * Método para agregar un menú.
+     * @param menú El nuevo menú.
+     */
+    public void setMenú(Menú menú) {
+        this.menú = menú;
+    }
+    
+    /**
+     * Método que regresa los tranportes que hay en CU.
+     * @return Una lista con la información.
+     */
+    public List<Transporte> getTransportes() {
+        return transportes;
+    }
+
+    /**
+     * Método que agrega un nuevo transporte.
+     * @param transportes Una lista con la nueva información
+     */
+    public void setTransportes(List<Transporte> transportes) {
+        this.transportes = transportes;
+    }
+    
+    /**
+     * Método que regresa el id del transporte seleccionado.
+     * @return Un entero con la información.
+     */
+    public int getIdTransporte() {
+        return idTransporte;
+    }
+
+    /**
+     * Método que asigna un nuevo id de transporte.
+     * @param idTransporte El nuevo id.
+     */
+    public void setIdTransporte(int idTransporte) {
+        this.idTransporte = idTransporte;
+    }
+
+    /**
+     * Método que regresa un transporte.
+     * @return Un transporte.
+     */
+    public Transporte getTransporte() {
+        return transporte;
+    }
+
+    /**
+     * Método que asigna un nuevo transporte.
+     * @param transporte El n uevo transporte.
+     */
+    public void setTransporte(Transporte transporte) {
+        this.transporte = transporte;
+    }
+    
+    /**
+     * Método que regresa los tipos de transporte que hay en cu
+     * @return Una lista con la información.
+     */
+    public List<String> getTipos() {
+        return servicioLocal.tipos();
+    }
+    
+    /**
+     * Método que regresa el tipo de trasnporte seleccionado.
+     * @return Una cadena con la información.
+     */
+    public String getTipo() {
+        return tipo;
+    }
+
+    /**
+     * Método que asigna un tipo de trasnporte.
+     * @param tipo El tipo de transporte.
+     */
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
+    /**
+     * Método que busca los transportes del tipo elegido por el usuario.
+     */
+    public void buscarTransporte(){
+        transportes = servicioLocal.porTipos(this.tipo);
+    }
+    
+    /**
+     * Método para guardar la imagen del local.
+     * @param event El evento que se activa al agregar la imagen.
+     */
+    public void imagenLocal(FileUploadEvent event) {
+        UploadedFile file = event.getFile();
+        this.local.setImagen(file.getContents());
+    }
+    
+    /**
+     * Método que guarda la imagen de un servicio.
+     * @param event El evento que se activa al agregar la imagen.
+     */
+    public void imagenServicio(FileUploadEvent event) {
+        UploadedFile file = event.getFile();
+        this.servicio.setImagen(file.getContents());
     }
     
 }

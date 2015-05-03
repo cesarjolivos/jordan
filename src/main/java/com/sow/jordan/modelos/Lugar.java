@@ -16,7 +16,6 @@ import javax.validation.constraints.NotNull;
  * Clase que servirá como un catalogo que muestra los lugares dentro de Ciudad
  * Universitaria, crea una tabla para guardar la información en la base de datos.
  * @author GARCÍA CASTRO HÉCTOR JAVIER
- * @author LARA RAMÍREZ JOSÉ JAVIER
  * @author OLIVOS NAVARRO CESAR JONATHAN
  * @author VILLEGAS MORENO ZEUXIS DANIEL
  */
