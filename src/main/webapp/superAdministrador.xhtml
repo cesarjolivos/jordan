@@ -238,10 +238,8 @@ Pagina que muestra la información de un local.
                             <h:outputText value="#{_usuario.privilegio}" />
                         </p:column>
                         <p:column headerText="Otorgar Privilegios">
-                            <p:commandButton 
-                                value="Otorgar" 
-                                actionListener="#{_usuario.setPrivilegio('ROLE_ADMIN')}" 
-                                update="@form :retira"/>
+                            <p:commandButton value="Otorgar" update="@form :retira"
+                                actionListener="#{_usuario.setPrivilegio('ROLE_ADMIN'   )}" />
                         </p:column>
                     </p:dataTable>
                 </h:form>

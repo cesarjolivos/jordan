@@ -65,7 +65,7 @@ public class ControladorSesión implements Serializable {
             case "ROLE_ADMIN":
                 return "administrador.xhtml";
         }
-        return null;
+        return "index.xhtml";
     }
     
     /**

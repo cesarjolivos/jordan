@@ -310,10 +310,10 @@ public class Local implements Serializable {
     
     /**
      * Método que regresa la calificaron promedio del local.
-     * @return Un double con la información.
+     * @return Un int con la información.
      */
-    public double getCalificación() {
-        return calificación;
+    public int getCalificación() {
+        return (int)calificación;
     }
 
     /**

@@ -79,6 +79,7 @@ public class ControladorLocal implements Serializable {
     private int idLugar;//indica el id del lugar seleccionado.
     private int idTransporte;//indica el id del transporte seleccionado.
     private String tipo;//indica el tipo de transporte seleccionado.
+    private int posición;//indica la posición en el top 5
     
     /**
      * Método que se ejecuta después de realizar la inyección de dependencias.
@@ -94,6 +95,7 @@ public class ControladorLocal implements Serializable {
         mapa = new DefaultMapModel(); 
         lugar = new Lugar();
         servicio = new Servicio();
+        menú = new Menú();
         transporte = new Transporte();
     }
     
@@ -384,6 +386,23 @@ public class ControladorLocal implements Serializable {
      */
     public void buscarTransporte(){
         transportes = servicioLocal.porTipos(this.tipo);
+    }
+    
+    /**
+     * Método que regresa la posición que ocupa un local en la lista de top 5.
+     * @return Un entero con la información.
+     */
+    public int getPosición() {
+        return posición++;
+    }
+    
+    /**
+     * Método que regresa la lista de lugares con mejor calificación.
+     * @return Una lista de los mejores 5 locales.
+     */
+    public List<Local> getTop5() {
+        posición = 1;
+        return locales;
     }
     
     /**
