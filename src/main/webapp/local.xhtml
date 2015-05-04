@@ -95,7 +95,7 @@ Pagina que muestra la información de un local.
                         <h:outputText value="Comentario"/>
                         <h:panelGrid columns="2" cellpadding="5" style="text-align: right">
                             <h:outputText value="Puntuación: " />
-                            <p:rating value="4"/>
+                            <p:rating value=""/>
                             <!--p:rating value="{controladorLocal.comentario.calificación}"/-->
                         </h:panelGrid>
                     </h:panelGrid>
@@ -111,6 +111,19 @@ Pagina que muestra la información de un local.
                     />
                 <br/><br/>
             </h:form><br/>
+            <h:form id="publicacion" style="width: 100%">
+                <p:dataScroller value="#{controladorLocal.comentarios}" 
+                                var="_comentario" chunkSize="5"  style="width: 100%">
+                    <f:facet name="header" >COMENTARIOS</f:facet>
+                    <p:panelGrid columns="3" style="width: 100%">
+                        <p:outputLabel value="#{_comentario.usuario}" />
+                        <p:outputLabel value="#{_comentario.comentario}" />
+                        <p:commandButton rendered="#{controladorLogeo.esAdministrador()}" 
+                                         value="Borrar" style="width: 100px; float: right; margin-right: 10%"/>
+                    </p:panelGrid>
+                </p:dataScroller>
+            </h:form><br/>
+            
             <p:dialog header="Compartir en:" widgetVar="redes" modal="true" height="200" width="400">
                 <div align="center">
                     <h:panelGrid columns="2" cellpadding="10">
@@ -127,22 +140,7 @@ Pagina que muestra la información de un local.
                     </h:form>
                 </div>
             </p:dialog>
-            <h:form id="publicacion" style="width: 100%">
-                <p:dataScroller value="#{controladorUsuario.usuarios}" 
-                                var="_usuario" chunkSize="5"  style="width: 100%">
-                    <f:facet name="header" >
-                        COMENTARIOS
-                    </f:facet>
-                    <p:panelGrid columns="3" style="width: 100%">
-                        <p:outputLabel value="USUARIO: " />
-                        <p:outputLabel value="Comentario realizado por el usuario..." />
-                        <p:commandButton rendered="#{controladorLogeo.esAdministrador()}" 
-                                         value="Borrar" style="width: 100px; float: right; margin-right: 10%"/>
-                    </p:panelGrid>
-
-                </p:dataScroller>
-            </h:form><br/>
+            
         </ui:define>
-
     </ui:composition>
 </html>

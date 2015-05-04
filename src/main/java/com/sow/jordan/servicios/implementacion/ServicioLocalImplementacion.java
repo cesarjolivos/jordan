@@ -162,4 +162,26 @@ public class ServicioLocalImplementacion implements ServicioLocal {
         return repositorioTransporte.porTipos(tipo);
     }
     
+    /**
+     * Método que carga los comentarios del local que resibe como parametro.
+     * @param local El local que se desea obtener los comentarios.
+     * @return Una lista con la información.
+     */
+    @Override
+    public List<Comentario> cargarComentarios(Local local){
+        return repositorioLocal.cargarComentarios(local);
+    }
+    
+    /**
+     * Método que busca el comentario de un local que fuere realizado por un
+     * usuario.
+     * @param local El local del que se desea obtener el comentario.
+     * @param usuario El usuario que realiza el comentario.
+     * @return Un comentario.
+     */
+    @Override
+    public Comentario buscarComentario(Local local, Usuario usuario){
+        return repositorioLocal.buscarComentario(local, usuario);
+    }
+    
 }

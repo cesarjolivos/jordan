@@ -76,6 +76,14 @@ public class ControladorLocal implements Serializable {
      */
     private Transporte transporte;
     /**
+     * Variable que almacena los comentarios de un local.
+     */
+    private List<Comentario> comentarios;
+    /**
+     * Variable que almacena un comentario.
+     */
+    private Comentario comentario;
+    /**
      * Variables auxiliares.
      */
     private int idLugar;//indica el id del lugar seleccionado.
@@ -94,6 +102,7 @@ public class ControladorLocal implements Serializable {
         locales = servicioLocal.cargarLocales();
         local.setMenú(new ArrayList<Menú>());
         local.setTransportes(new ArrayList<Transporte>());
+        local.setComentarios(new ArrayList<Comentario>());
         mapa = new DefaultMapModel(); 
         lugar = new Lugar();
         servicio = new Servicio();
@@ -112,6 +121,7 @@ public class ControladorLocal implements Serializable {
         local = new Local();
         local.setMenú(new ArrayList<Menú>());
         local.setTransportes(new ArrayList<Transporte>());
+        local.setComentarios(new ArrayList<Comentario>());
     }
     
     /**
@@ -407,6 +417,25 @@ public class ControladorLocal implements Serializable {
      */
     public void buscarTransporte(){
         transportes = servicioLocal.porTipos(this.tipo);
+    }
+
+    public List<Comentario> getComentarios() {
+        comentarios = servicioLocal.cargarComentarios(local);
+        return comentarios;
+    }
+
+    public int getCalificación(Usuario usuario) {
+        comentario = servicioLocal.buscarComentario(local, usuario);
+        if(comentario == null){
+            comentario = new Comentario();
+            comentario.setLocal(local);
+            comentario.setUsuario(usuario);
+        }
+        return comentario.getCalificación();
+    }
+
+    public void setComentario(Comentario comentario) {
+        this.comentario = comentario;
     }
     
     /**

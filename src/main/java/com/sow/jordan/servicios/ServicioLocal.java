@@ -3,10 +3,12 @@
  */
 package com.sow.jordan.servicios;
 
+import com.sow.jordan.modelos.Comentario;
 import com.sow.jordan.modelos.Local;
 import com.sow.jordan.modelos.Lugar;
 import com.sow.jordan.modelos.Servicio;
 import com.sow.jordan.modelos.Transporte;
+import com.sow.jordan.modelos.Usuario;
 import java.util.List;
 
 /**
@@ -104,5 +106,21 @@ public interface ServicioLocal {
      * @return Una lista con la información.
      */
     List<Transporte> porTipos(String tipo);
+    
+    /**
+     * Método que carga los comentarios del local que resibe como parametro.
+     * @param local El local que se desea obtener los comentarios.
+     * @return Una lista con la información.
+     */
+    List<Comentario> cargarComentarios(Local local);
+    
+    /**
+     * Método que busca el comentario de un local que fuere realizado por un
+     * usuario.
+     * @param local El local del que se desea obtener el comentario.
+     * @param usuario El usuario que realiza el comentario.
+     * @return Un comentario.
+     */
+    Comentario buscarComentario(Local local, Usuario usuario);
     
 }
