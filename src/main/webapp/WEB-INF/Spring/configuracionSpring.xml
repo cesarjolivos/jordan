@@ -35,8 +35,8 @@
             <bean class="com.sow.jordan.modelos.Usuario">
                 <property name="activo" value="TRUE" />
                 <!--property name="privilegio" value="ROLE_USER"/-->
-                <!--property name="privilegio" value="ROLE_ADMIN"/-->
-                <property name="privilegio" value="ROLE_ROOT"/>
+                <property name="privilegio" value="ROLE_ADMIN"/>
+                <!--property name="privilegio" value="ROLE_ROOT"/-->
             </bean>
         </property>
     </bean>

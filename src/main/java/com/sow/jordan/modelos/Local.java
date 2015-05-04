@@ -89,7 +89,7 @@ public class Local implements Serializable {
      */
     @OneToMany(fetch = FetchType.EAGER,
             cascade = CascadeType.ALL,
-            mappedBy = "usuario",
+            mappedBy = "local",
             orphanRemoval = true)
     private  List<Comentario> comentarios;
     /**

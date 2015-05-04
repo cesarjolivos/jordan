@@ -80,10 +80,6 @@ public class ControladorLocal implements Serializable {
      */
     public Usuario usuario;
     /**
-     * Variable que almacena los comentarios de un local.
-     */
-    private List<Comentario> comentarios;
-    /**
      * Variable que almacena un comentario.
      */
     private Comentario comentario;
@@ -146,9 +142,10 @@ public class ControladorLocal implements Serializable {
     }
     
     public void guardarComentario(){
+        local.getComentarios().remove(comentario);
         local.getComentarios().add(comentario);
-        servicioLocal.guardarComentario(comentario);
-        comentario = new Comentario();
+        servicioLocal.guardarLocal(local);
+        locales = servicioLocal.cargarLocales();
     }
     
     /**

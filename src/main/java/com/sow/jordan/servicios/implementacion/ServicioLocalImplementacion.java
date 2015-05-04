@@ -41,6 +41,9 @@ public class ServicioLocalImplementacion implements ServicioLocal {
         for(Menú menú:local.getMenú()){
             menú.setLocal(local);
         }
+        /**for(Comentario c:local.getComentarios()){
+            c.setLocal(local);
+        }*/
         repositorioLocal.save(local);
     }
     
@@ -174,6 +177,7 @@ public class ServicioLocalImplementacion implements ServicioLocal {
     public List<Comentario> cargarComentarios(Local local){
         return repositorioComentario.cargarComentarios(local);
     }
+    
     
     @Override
     public void guardarComentario(Comentario comentario){
