@@ -1,16 +1,224 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>TODO supply a title</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+Pagina que muestra las funciones del administrador.
+-->    
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/Plantillas/admin.xhtml">
+        <ui:define name="content">
+            
+            <h:form id="agregar" style="text-align: center" >
+                <p:commandButton ajax="false" styleClass="botones"
+                                 type="button" value="Agregar Establecimiento" 
+                                 onclick="PF('agregarEstablecimiento').show();"/> 
+                <br/><br/>
+                <p:commandButton ajax="false" styleClass="botones"
+                                 type="button" value="Eliminar Establecimiento" 
+                                 onclick="PF('eliminarEstablecimiento').show();"/>
+                <br/><br/>
+                <p:commandButton ajax="false" styleClass="botones"
+                                 type="button" value="Eliminar Usuario" 
+                                 onclick="PF('eliminarUsuario').show();"/>
+                <br/><br/>
+            </h:form>
+            
+            <p:dialog header="Agregar Establecimiento" height="100%" modal="true" 
+                      widgetVar="agregarEstablecimiento">
+                <h:form style="text-align: center">
+                    <h:panelGrid columns="3">
+                        <h:panelGrid columns="1">
+                            <h:panelGrid id="local" columns="2" style="text-align: left">
+                                <p:outputLabel value="Nombre: "/>
+                                <p:inputText id="nombre" placeholder="Nombre" 
+                                             value="#{controladorLocal.local.nombre}"/>
+                                <p:outputLabel value="Alias: "/>
+                                <p:inputText id="alias" placeholder="Alias" 
+                                             value="#{controladorLocal.local.alias}"/>
+                                <p:outputLabel value="Especialidad: "/>
+                                <p:inputText id="especialidad" placeholder="Especialidad" 
+                                             value="#{controladorLocal.local.especialidad}"/>
+                                <p:outputLabel value="Lugar:"/>
+                                <p:selectOneMenu effect="fade" style="width: 100%" 
+                                                 value="#{controladorLocal.idLugar}" >
+                                    <f:selectItem itemLabel="Seleccione un lugar" itemValue="" />
+                                    <f:selectItems value="#{controladorLocal.lugares}" var="_lugar"  
+                                                   itemLabel="#{_lugar.nombre}" itemValue="#{_lugar.id}" />
+                                </p:selectOneMenu>
+                                <p:outputLabel value="Latitud: "/>
+                                <p:inputText id="latitud" placeholder="Latitud" 
+                                             value="#{controladorLocal.local.latitud}"/>
+                                <p:outputLabel value="Longitud: "/>
+                                <p:inputText id="longitud" placeholder="Longitud" 
+                                             value="#{controladorLocal.local.longitud}"/>
+                            </h:panelGrid>
+                            <p:outputLabel value="Descripción"/>
+                            <p:inputTextarea id="descripcion" cols="37" rows="2"
+                                             placeholder="Descripción" 
+                                             value="#{controladorLocal.local.descripción}"/>
+                        </h:panelGrid>
+                        <h:panelGrid columns="1">
+                            <h:form>
+                                <p:fileUpload allowTypes="/(\.|\/)(gif|jpe?g|png)$/" auto="false" 
+                                              immediate="true" mode="advanced" multiple="false"
+                                              invalidFileMessage="Tipo de archivo invalido" 
+                                              label="elegir" update="imagen" uploadLabel="añadir"
+                                              sizeLimit="2097152" 
+                                              fileUploadListener="#{controladorLocal.imagenLocal}" 
+                                              value="#{controladorLocal.local.imagen}"/>
+                                <h:graphicImage id="imagen" height="200" 
+                                                rendered="#{controladorLocal.local.imagen ne null}"
+                                                value="data:image/png;base64,#{controladorLocal.local.imagenUrl}"/> 
+                            </h:form>
+                        </h:panelGrid>
+                        <h:panelGrid columns="1"  width="300">
+                            <p:dataTable value="#{controladorLocal.servicios}"
+                                         var="_servicio" rowKey="#{_servicio.id}"
+                                         selection="#{controladorLocal.local.servicios}"
+                                         >                       
+                                <p:column selectionMode="multiple" style="width:16px;text-align:center" />
+                                <p:column style="width:30px;text-align:center">
+                                    <h:graphicImage id="imagen" width="30px"
+                                                    rendered="#{_servicio.imagen ne null}"
+                                                    value="data:image/png;base64,#{_servicio.imagenUrl}"/> 
+                                </p:column>
+                                <p:column headerText="Seleccione los servicio" >
+                                    #{_servicio.nombre}
+                                </p:column>
+                            </p:dataTable>
+                        </h:panelGrid>
+                    </h:panelGrid>
+                    <br/>
+                    <h:panelGrid columns="2"  cellpadding="10">
+                        <h:panelGrid columns="2" id="panelMenu">
+                            <p:inputText id="categoria" placeholder="Categoria"  style="width:110px" 
+                                         value="#{controladorLocal.menú.categoria}" />
+                            <h:panelGrid columns="3">
+                                <p:inputText placeholder="Precio min" style="width:70px" 
+                                             value="#{controladorLocal.menú.precioMin}" />
+                                <p:inputText placeholder="Precio max" style="width:70px"
+                                             value="#{controladorLocal.menú.precioMax}" />
+                            </h:panelGrid>
+                            <p:commandButton actionListener="#{controladorLocal.guardarMenús()}"
+                                             value="Agregar Menu" update=":agregar @form" />
+                        </h:panelGrid>
+
+                        <h:panelGrid columns="2">
+                            <p:selectOneMenu value="#{controladorLocal.tipo}" style="width:150px">
+                                <p:ajax listener="#{controladorLocal.buscarTransporte()}" update="transpotorte" />
+                                <f:selectItem itemLabel="Seleccione un tipo" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{controladorLocal.tipos}"/>
+                            </p:selectOneMenu>
+                            <p:selectOneMenu id="transpotorte" value="#{controladorLocal.idTransporte}" style="width:150px">
+                                <f:selectItem itemLabel="Seleccione una estación" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{controladorLocal.transportes}" var="_transporte"  
+                                               itemLabel="#{_transporte.estacion}" itemValue="#{_transporte.id}" />
+                            </p:selectOneMenu>
+                            <p:commandButton actionListener="#{controladorLocal.guardarTransporte()}"
+                                             value="Agregar Transporte" update=":agregar @form"  />
+                        </h:panelGrid>
+
+                        <h:panelGrid style="width: 340px">
+                            <p:dataTable value="#{controladorLocal.local.menú}" 
+                                         var="_menú" scrollable="true" scrollHeight="150"> 
+                                <p:column headerText="Categoría" style="width:100px">
+                                    #{_menú.categoria}
+                                </p:column>
+                                <p:column headerText="Precio Min" style="width:80px">
+                                    #{_menú.precioMin}
+                                </p:column>
+                                <p:column headerText="Precio Max" style="width: 80px">
+                                    #{_menú.precioMax}
+                                </p:column>
+                                <p:column style="width: 80px">
+                                    <p:commandButton value="Borrar" update=":agregar @form"
+                                                     actionListener="#{controladorLocal.eliminarMenú(_menú)}"/>
+                                </p:column>
+                            </p:dataTable>﻿
+                        </h:panelGrid>
+
+                        <h:panelGrid>
+
+                            <h:panelGrid style="width: 340px">
+                                <p:dataTable value="#{controladorLocal.local.transportes}" 
+                                             var="_transporte" scrollable="true" scrollHeight="150"> 
+                                    <p:column headerText="Tipo" style="width:100px">
+                                        #{_transporte.tipo}
+                                    </p:column>
+                                    <p:column headerText="Estación" style="width:80px">
+                                        #{_transporte.estacion}
+                                    </p:column>
+                                    <p:column style="width: 80px">
+                                        <p:commandButton value="Borrar" update=":agregar @form"
+                                                         actionListener="#{controladorLocal.eliminarTransporte(_transporte)}"/>
+                                    </p:column>
+                                </p:dataTable>﻿
+                            </h:panelGrid>
+
+                        </h:panelGrid>
+                    </h:panelGrid>
+                    <br/>
+                    <p:commandButton ajax="false"
+                                     actionListener="#{controladorLocal.guardarLocal()}" 
+                                     value="Agregar Local" update="@form"/>
+                </h:form>
+            </p:dialog>
+
+            <p:dialog header="Eliminar Establecimiento" height="100%" modal="true" 
+                      widgetVar="eliminarEstablecimiento">
+                <h:form>
+                    <h:panelGrid style="width: 800px">
+                        <p:dataTable var="_local" value="#{controladorLocal.locales}">
+                            <p:column headerText="Local" >
+                                <h:outputText value="#{_local.nombre}" style="width:400px"/>
+                            </p:column>
+                            <p:column headerText="Alias">
+                                <h:outputText value="#{_local.alias}" style="width:150px"/>
+                            </p:column>
+                            <p:column headerText="Lugar">
+                                <h:outputText value="#{_local.lugar.nombre}" style="width:150px"/>
+                            </p:column>
+                            <p:column headerText="Eliminar Local" style="width:100px">
+                                <p:commandButton value="Eliminar" 
+                                                 actionListener="#{controladorLocal.eliminarLocal(_local)}" 
+                                                 update="@form"/>
+                            </p:column>
+                        </p:dataTable>
+                    </h:panelGrid>
+                </h:form>
+            </p:dialog>
+
+            <p:dialog header="Eliminar Usuario" height="100%" modal="true" 
+                      widgetVar="eliminarUsuario">
+                <h:form id="elimina">
+                    <p:dataTable var="_usuario" value="#{controladorUsuario.usuarios}">
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{_usuario.nombre}" />
+                        </p:column>
+                        <p:column headerText="Usuario">
+                            <h:outputText value="#{_usuario.usuario}" />
+                        </p:column>
+                        <p:column headerText="Correo">
+                            <h:outputText value="#{_usuario.correo}" />
+                        </p:column>
+                        <p:column headerText="Contraseña">
+                            <h:outputText value="#{_usuario.contraseña}" />
+                        </p:column>
+                        <p:column headerText="Privilegio">
+                            <h:outputText value="#{_usuario.privilegio}" />
+                        </p:column>
+                        <p:column headerText="Eliminar Usuario">
+                            <p:commandButton value="Eliminar" update="@form"
+                                             actionListener="#{controladorUsuario.eliminarUsuario(_usuario)}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </p:dialog>
+            
+        </ui:define>
+    </ui:composition>
 </html>

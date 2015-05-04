@@ -43,7 +43,7 @@ Pagina para agregar datos.
                     <p:inputText id="transporte" placeholder="Tipo de transporte" required="true"
                                  value="#{controladorLocal.transporte.tipo}" />
                     <p:inputText id="estacion" placeholder="Estación" required="true"
-                                 value="#{controladorLocal.transporte.estacion}" />
+                                 value="#{controladorLocal.transporte.estación}" />
                     <p:commandButton ajax="false" 
                                      actionListener="#{controladorLocal.agregarTransporte()}" 
                                      value="Agregar Lugar" update=":transportes @form"/>
@@ -68,8 +68,9 @@ Pagina para agregar datos.
                     </p:column>
                 </p:dataTable>
                 <p:dataTable value="#{controladorLocal.transportes}" var="_transporte">
+                    <p:column headerText="Lugar">#{_transporte.id}</p:column>
                     <p:column headerText="Lugar">#{_transporte.tipo}</p:column>
-                    <p:column headerText="Lugar">#{_transporte.estacion}</p:column>
+                    <p:column headerText="Lugar">#{_transporte.estación}</p:column>
                 </p:dataTable> 
             </h:form>
         </ui:define>

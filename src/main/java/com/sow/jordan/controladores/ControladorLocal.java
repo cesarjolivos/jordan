@@ -12,7 +12,9 @@ import javax.annotation.PostConstruct;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
 import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
+import org.primefaces.model.map.Marker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -212,6 +214,25 @@ public class ControladorLocal implements Serializable {
     public void setLocal(Local local) {
         this.local = local;
     }    
+    
+    /**
+     * Método que regresa el mapa para ver el local.
+     * @return Un MapModel.
+     */
+    public MapModel getMapa() {
+        mapa = new DefaultMapModel();
+        LatLng coord = new LatLng(local.getLatitud(), local.getLongitud());
+        mapa.addOverlay(new Marker(coord, local.getNombre()));
+        return mapa;
+    }
+
+    /**
+     * Método que asigna un nuevo mapa del local.
+     * @param mapa El nuevo mapa.
+     */
+    public void setMapa(MapModel mapa) {
+        this.mapa = mapa;
+    }
     
     /**
      * Método que regresa el id del lugar seleccionado.

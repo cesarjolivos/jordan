@@ -20,7 +20,7 @@ Pagina principal del sistema Jordan.
                         <h:panelGrid columns="2" width="20%" style="float: left">
                             <p:outputLabel value="#{controladorLocal.posición}" 
                                            style="font-size: 30pt"/>
-                            <h:commandLink action="local.xhtml" actionListener="#{controladorLocal.setLocal(_local)}">
+                            <h:commandLink action="local" actionListener="#{controladorLocal.setLocal(_local)}">
                                 <h:graphicImage width="150" height="150"
                                                 rendered="#{_local.imagen ne null}"
                                                 value="data:image/png;base64,#{_local.imagenUrl}"/> 
@@ -29,7 +29,7 @@ Pagina principal del sistema Jordan.
 
                         <h:panelGrid columns="1" width="80%" style="float: right; left: 5%">
                             <h:panelGrid columns="2" width="100%">
-                                <p:commandLink ajax="false" action="local.xhtml" 
+                                <p:commandLink ajax="false" action="local" 
                                                value="#{_local.nombre} (#{_local.alias})"
                                                actionListener="#{controladorLocal.setLocal(_local)}"
                                                style="font-size: 14pt"/>

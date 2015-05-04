@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-Pagina que muestra la información de un local.
+Pagina que muestra las funciones del superadministrador.
 -->    
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -114,7 +114,7 @@ Pagina que muestra la información de un local.
                             <p:commandButton actionListener="#{controladorLocal.guardarMenús()}"
                                              value="Agregar Menu" update=":agregar @form" />
                         </h:panelGrid>
-
+                        
                         <h:panelGrid columns="2">
                             <p:selectOneMenu value="#{controladorLocal.tipo}" style="width:150px">
                                 <p:ajax listener="#{controladorLocal.buscarTransporte()}" update="transpotorte" />
@@ -124,7 +124,7 @@ Pagina que muestra la información de un local.
                             <p:selectOneMenu id="transpotorte" value="#{controladorLocal.idTransporte}" style="width:150px">
                                 <f:selectItem itemLabel="Seleccione una estación" itemValue="" noSelectionOption="true" />
                                 <f:selectItems value="#{controladorLocal.transportes}" var="_transporte"  
-                                               itemLabel="#{_transporte.estacion}" itemValue="#{_transporte.id}" />
+                                               itemLabel="#{_transporte.estación}" itemValue="#{_transporte.id}" />
                             </p:selectOneMenu>
                             <p:commandButton actionListener="#{controladorLocal.guardarTransporte()}"
                                              value="Agregar Transporte" update=":agregar @form"  />
@@ -158,7 +158,7 @@ Pagina que muestra la información de un local.
                                         #{_transporte.tipo}
                                     </p:column>
                                     <p:column headerText="Estación" style="width:80px">
-                                        #{_transporte.estacion}
+                                        #{_transporte.estación}
                                     </p:column>
                                     <p:column style="width: 80px">
                                         <p:commandButton value="Borrar" update=":agregar @form"

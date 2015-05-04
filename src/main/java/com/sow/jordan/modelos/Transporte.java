@@ -34,12 +34,7 @@ public class Transporte implements Serializable {
      * Variable que almacena la estación del tranporte, dicho valor no puede ser nulo.
      */
     @NotNull
-    private String estacion;
-    /**
-     * Variable que almacena la referencia al local del que proviene.
-     */
-    @ManyToOne(cascade = CascadeType.ALL,fetch =FetchType.EAGER)
-    private Local local;
+    private String estación;
 
     /**
      * Método que regresa el id del tranporte.
@@ -77,32 +72,16 @@ public class Transporte implements Serializable {
      * Método que regresa la estación del tranporte.
      * @return Una cadena con la informaión.
      */
-    public String getEstacion() {
-        return estacion;
+    public String getEstación() {
+        return estación;
     }
 
     /**
      * Método que asisgna la nueva estación.
-     * @param estacion La nueva estación.
+     * @param estación La nueva estación.
      */
-    public void setEstacion(String estacion) {
-        this.estacion = estacion;
-    }
-
-    /**
-     * Método que regresa el local del que proviene.
-     * @return Un local.
-     */
-    public Local getLocal() {
-        return local;
-    }
-
-    /**
-     * Método que asigna un nuevo local.
-     * @param local El nuevo local.
-     */
-    public void setLocal(Local local) {
-        this.local = local;
+    public void setEstación(String estación) {
+        this.estación = estación;
     }
     
     @Override
@@ -110,7 +89,7 @@ public class Transporte implements Serializable {
         int hash = 7;
         hash = 61 * hash + Objects.hashCode(this.id);
         hash = 61 * hash + Objects.hashCode(this.tipo);
-        hash = 61 * hash + Objects.hashCode(this.estacion);
+        hash = 61 * hash + Objects.hashCode(this.estación);
         return hash;
     }
 

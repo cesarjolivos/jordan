@@ -10,4 +10,13 @@
         </variable-resolver>
     </application>
     
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-action>local</from-action>
+            <to-view-id>local.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
+    </navigation-rule>
+    
 </faces-config>

@@ -82,10 +82,7 @@ public class Local implements Serializable {
     /**
      * Variable que almacena la referencia a los transportes sercanos al local.
      */
-    @OneToMany(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL,
-            mappedBy = "local",
-            orphanRemoval = true)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Transporte> transportes;
     /**
      * Variable que almacena los comentarios que tiene el local.
