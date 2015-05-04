@@ -114,6 +114,8 @@ public interface ServicioLocal {
      */
     List<Comentario> cargarComentarios(Local local);
     
+    void guardarComentario(Comentario comentario);
+    
     /**
      * Método que busca el comentario de un local que fuere realizado por un
      * usuario.

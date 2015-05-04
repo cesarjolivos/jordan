@@ -31,21 +31,4 @@ public interface RepositorioLocal extends CrudRepository<Local, Integer>{
     @Query("SELECT local FROM Local local WHERE local.id = ?")
     Local buscarLocal(Integer id);
     
-    /**
-     * Método que carga los comentarios del local que resibe como parametro.
-     * @param local El local que se desea obtener los comentarios.
-     * @return Una lista con la información.
-     */
-    @Query("SELECT c FROM Comentario c WHERE c.local = ?")
-    List<Comentario> cargarComentarios(Local local);
-    
-    /**
-     * Método que busca el comentario de un local que fuere realizado por un usuario.
-     * @param local El local del que se desea obtener el comentario.
-     * @param usuario El usuario que realiza el comentario.
-     * @return Un comentario.
-     */
-    @Query("SELECT c FROM Comentario c WHERE c.local = ? AND c.usuario = ?")
-    Comentario buscarComentario(Local local, Usuario usuario);
-    
 }

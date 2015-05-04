@@ -89,34 +89,38 @@ Pagina que muestra la información de un local.
                 </f:facet>
                 <h:outputText value="#{controladorLocal.local.descripción}"/>
             </p:panelGrid><br/>
-            <h:form id="Coment" rendered="#{controladorSesión.sesionIniciada}">      
+            <h:form id="Coment" rendered="#{controladorLocal.getSesionIniciada(controladorSesión)}">      
                 <h:panelGrid id="edicion" columns="1" width="100%">
                     <h:panelGrid columns="2" width="100%">
                         <h:outputText value="Comentario"/>
                         <h:panelGrid columns="2" cellpadding="5" style="text-align: right">
                             <h:outputText value="Puntuación: " />
-                            <p:rating value=""/>
+                            <p:rating value="#{controladorLocal.comentario.calificación}"/>
                             <!--p:rating value="{controladorLocal.comentario.calificación}"/-->
                         </h:panelGrid>
                     </h:panelGrid>
                     <p:inputTextarea id="comentario" style="width:99%" rows="2" placeholder="Comentario" 
-                                     value="comentario ..."/>
+                                     value="#{controladorLocal.comentario.comentario}"/>
                     <!--p:inputTextarea id="comentario" style="width:99%" rows="2" placeholder="Comentario" 
                                      value="{controladorLocal.comentario.comentario}"/-->
                 </h:panelGrid>
                 <p:commandButton 
                     value="Publicar" update=":publicacion @form" ajax="true" style="float: left"
+                    actionListener="#{controladorLocal.guardarComentario()}"
+                    />
+                <!--p:commandButton 
+                    value="Publicar" update=":publicacion @form" ajax="true" style="float: left"
                     actionListener="{controladorLocal.guardarComentario(controladorLogeo.nombre)}"
                     onsuccess="PF('redes').show();"
-                    />
+                    /-->
                 <br/><br/>
             </h:form><br/>
             <h:form id="publicacion" style="width: 100%">
-                <p:dataScroller value="#{controladorLocal.comentarios}" 
+                <p:dataScroller value="#{controladorLocal.local.comentarios}" 
                                 var="_comentario" chunkSize="5"  style="width: 100%">
                     <f:facet name="header" >COMENTARIOS</f:facet>
                     <p:panelGrid columns="3" style="width: 100%">
-                        <p:outputLabel value="#{_comentario.usuario}" />
+                        <p:outputLabel value="#{_comentario.usuario.usuario}" />
                         <p:outputLabel value="#{_comentario.comentario}" />
                         <p:commandButton rendered="#{controladorLogeo.esAdministrador()}" 
                                          value="Borrar" style="width: 100px; float: right; margin-right: 10%"/>

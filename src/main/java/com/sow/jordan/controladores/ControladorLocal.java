@@ -76,6 +76,10 @@ public class ControladorLocal implements Serializable {
      */
     private Transporte transporte;
     /**
+     * Variable que almacena un usuario.
+     */
+    public Usuario usuario;
+    /**
      * Variable que almacena los comentarios de un local.
      */
     private List<Comentario> comentarios;
@@ -139,6 +143,12 @@ public class ControladorLocal implements Serializable {
         transporte = servicioLocal.buscarTransporte(idTransporte);
         local.getTransportes().add(transporte);
         transporte = new Transporte();
+    }
+    
+    public void guardarComentario(){
+        local.getComentarios().add(comentario);
+        servicioLocal.guardarComentario(comentario);
+        comentario = new Comentario();
     }
     
     /**
@@ -418,20 +428,20 @@ public class ControladorLocal implements Serializable {
     public void buscarTransporte(){
         transportes = servicioLocal.porTipos(this.tipo);
     }
-
-    public List<Comentario> getComentarios() {
-        comentarios = servicioLocal.cargarComentarios(local);
-        return comentarios;
-    }
-
-    public int getCalificación(Usuario usuario) {
+    
+    public boolean getSesionIniciada(ControladorSesión controladorSesión){
+        usuario = controladorSesión.getUsuario();
         comentario = servicioLocal.buscarComentario(local, usuario);
         if(comentario == null){
             comentario = new Comentario();
             comentario.setLocal(local);
             comentario.setUsuario(usuario);
         }
-        return comentario.getCalificación();
+        return controladorSesión.getSesionIniciada();
+    }
+
+    public Comentario getComentario() {
+        return comentario;
     }
 
     public void setComentario(Comentario comentario) {

@@ -29,6 +29,9 @@ public class ServicioLocalImplementacion implements ServicioLocal {
     @Autowired
     private RepositorioTransporte repositorioTransporte;
     
+    @Autowired
+    private RepositorioComentario repositorioComentario;
+    
     /**
      * Método para guardar la información de los locales.
      * @param local El local a guardar.
@@ -169,7 +172,12 @@ public class ServicioLocalImplementacion implements ServicioLocal {
      */
     @Override
     public List<Comentario> cargarComentarios(Local local){
-        return repositorioLocal.cargarComentarios(local);
+        return repositorioComentario.cargarComentarios(local);
+    }
+    
+    @Override
+    public void guardarComentario(Comentario comentario){
+        repositorioComentario.save(comentario);
     }
     
     /**
@@ -181,7 +189,7 @@ public class ServicioLocalImplementacion implements ServicioLocal {
      */
     @Override
     public Comentario buscarComentario(Local local, Usuario usuario){
-        return repositorioLocal.buscarComentario(local, usuario);
+        return repositorioComentario.buscarComentario(local, usuario);
     }
     
 }
