@@ -239,7 +239,7 @@ Pagina que muestra las funciones del superadministrador.
                         </p:column>
                         <p:column headerText="Otorgar Privilegios">
                             <p:commandButton value="Otorgar" update="@form :retira"
-                                actionListener="#{_usuario.setPrivilegio('ROLE_ADMIN'   )}" />
+                                actionListener="#{controladorUsuario.privilegioDeAdmiistrador(_usuario)}"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>
@@ -257,7 +257,7 @@ Pagina que muestra las funciones del superadministrador.
                         </p:column>
                         <p:column headerText="Retirar Privilegios">
                             <p:commandButton value="Retirar" update="@form :otorga"
-                                             actionListener="#{_usuario.setPrivilegio('ROLE_USER')}"/>
+                                             actionListener="#{controladorUsuario.privilegioDeUsuario(_usuario)}"/>
                         </p:column>
                     </p:dataTable>
                 </h:form>

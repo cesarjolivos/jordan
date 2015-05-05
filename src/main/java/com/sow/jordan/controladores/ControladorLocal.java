@@ -34,6 +34,11 @@ public class ControladorLocal implements Serializable {
     @Autowired
     private ServicioLocal servicioLocal;
     /**
+     * Variable que almacena el servicio de usuarios.
+     */
+    @Autowired
+    private ServicioUsuario servicioUsuario;
+    /**
      * Variable que almacena los locales del sistema
      */
     private List<Local> locales;
@@ -88,6 +93,8 @@ public class ControladorLocal implements Serializable {
     private int idTransporte;//indica el id del transporte seleccionado.
     private String tipo;//indica el tipo de transporte seleccionado.
     private int posición;//indica la posición en el top 5
+    private String opciónDeBúsqueda;//variable que almacena la opción de búsqueda.
+    private String busqueda;//variable que almacena lo que se decea buscar.
     
     /**
      * Método que se ejecuta después de realizar la inyección de dependencias.
@@ -141,6 +148,18 @@ public class ControladorLocal implements Serializable {
     }
     
     /**
+     * Método que guarda un comentario en la base de datos.
+     */
+    public void guardarComentario(){
+        comentario.setUsuario(usuario);
+        local.setComentarios( servicioLocal.comentarios(local, usuario) );
+        local.getComentarios().add(comentario);
+        local.actualizarCalificacion();
+        servicioLocal.guardarLocal(local);
+        locales = servicioLocal.cargarLocales();
+    }
+    
+    /**
      * Método que agrega un lugar al catalogo de lugares.
      */
     public void agregarLugar(){
@@ -191,6 +210,34 @@ public class ControladorLocal implements Serializable {
     public void eliminarTransporte(Transporte transporte) {
         this.local.getTransportes().remove(transporte);
     }
+    
+    /**
+     * Método que elimina un comentario de la base de datos.
+     * @param usuario El usuario que publico el comentario.
+     */
+    public void eliminarComentario(Usuario usuario) {
+        usuario = servicioUsuario.buscarUsuario(usuario.getUsuario());
+        local.setComentarios( servicioLocal.comentarios(local, usuario) );
+        local.actualizarCalificacion();
+        servicioLocal.guardarLocal(local);
+        locales = servicioLocal.cargarLocales();
+        servicioUsuario.guardarUsuario(usuario);
+    }
+    
+    /**
+     * Método que indica si la sesión esta iniciada para poder realizar un 
+     * comentario.
+     * @param controladorSesión El controlador de la sesión.
+     * @return True en caso de estar iniciada la sesión.
+     */
+    public boolean sesionIniciada(ControladorSesión controladorSesión) {
+        usuario = controladorSesión.getUsuario();
+        comentario = servicioLocal.buscarComentario(local, usuario);
+        if(comentario == null){
+            comentario = new Comentario();
+        }
+        return controladorSesión.getSesionIniciada();
+    }    
     
     /**
      * Método que regresa la lista de locales.
@@ -419,6 +466,22 @@ public class ControladorLocal implements Serializable {
     }
     
     /**
+     * Método que regresa el comentario.
+     * @return Un comentario
+     */
+    public Comentario getComentario() {
+        return comentario;
+    }
+
+    /**
+     * Método que actualiza el comentario.
+     * @param comentario El comentario actualizado.
+     */
+    public void setComentario(Comentario comentario) {
+        this.comentario = comentario;
+    }
+    
+    /**
      * Método que regresa la posición que ocupa un local en la lista de top 5.
      * @return Un entero con la información.
      */
@@ -433,6 +496,45 @@ public class ControladorLocal implements Serializable {
     public List<Local> getTop5() {
         posición = 1;
         return locales;
+    }
+
+    /**
+     * Método que regresa la opción de busqueda.
+     * @return Una cadena con la opción.
+     */
+    public String getOpciónDeBúsqueda() {
+        return opciónDeBúsqueda;
+    }
+
+    /**
+     * Método que establece la nueva opción de busqueda.
+     * @param opciónDeBúsqueda La nueva opción.
+     */
+    public void setOpciónDeBúsqueda(String opciónDeBúsqueda) {
+        this.opciónDeBúsqueda = opciónDeBúsqueda;
+    }
+
+    /**
+     * Método que regresa el atributo de la busqueda.
+     * @return Una cadena con el atributo de la busqueda.
+     */
+    public String getBusqueda() {
+        return busqueda;
+    }
+
+    /**
+     * Método que almacena la busqueda.
+     * @param busqueda Una cadena con el atributo a buscar.
+     */
+    public void setBusqueda(String busqueda) {
+        this.busqueda = busqueda;
+    }    
+    
+    /**
+     * Método que realiza la busqueda.
+     */
+    public void realizarBúsqueda(){
+        
     }
     
     /**
@@ -452,81 +554,5 @@ public class ControladorLocal implements Serializable {
         UploadedFile file = event.getFile();
         this.servicio.setImagen(file.getContents());
     }
-    
-    /**
-    public boolean getSesionIniciada(ControladorSesión controladorSesión) {
-        usuario = controladorSesión.getUsuario();
-        comentario = servicioLocal.buscarComentario(local, usuario);
-        if (comentario == null) {
-            comentario = new Comentario();
-            comentario.setLocal(local);
-            comentario.setUsuario(usuario);
-        }
-        return controladorSesión.getSesionIniciada();
-    }
-    
-    public void guardarComentario(){
-        local.getComentarios().remove(comentario);
-        local.getComentarios().add(comentario);
-        servicioLocal.guardarLocal(local);
-        locales = servicioLocal.cargarLocales();
-    }
-    */
-    
-    /**
-     * 
-     * @return 
-     */
-    public Comentario getComentario() {
-        return comentario;
-    }
-
-    /**
-     * 
-     * @param comentario 
-     */
-    public void setComentario(Comentario comentario) {
-        this.comentario = comentario;
-    }
-    
-    public boolean sesionIniciada(ControladorSesión controladorSesión) {
-        usuario = controladorSesión.getUsuario();
-        comentario = servicioLocal.buscarComentario(local, usuario);
-        if(comentario == null){
-            comentario = new Comentario();
-        }
-        return controladorSesión.getSesionIniciada();
-    }
-    
-    public void guardarComentario(){
-        comentario.setUsuario(usuario);
-        local.setComentarios( servicioLocal.comentarios(local, usuario) );
-        local.getComentarios().add(comentario);
-        servicioLocal.guardarLocal(local);
-        locales = servicioLocal.cargarLocales();
-    }
-    
-    public void eliminarComentario(Usuario usuario) {
-        usuario = servicioUsuario.buscarUsuario(usuario.getUsuario());
-        local.setComentarios( servicioLocal.comentarios(local, usuario) );
-        servicioLocal.guardarLocal(local);
-        locales = servicioLocal.cargarLocales();
-        servicioUsuario.guardarUsuario(usuario);
-    }
-    
-    /**
-     * Variable que almacena el servicio de usuarios.
-     */
-    @Autowired
-    private ServicioUsuario servicioUsuario;
-        
-    /**
-    public void eliminarComentario(Comentario comentario) {
-        local.setComentarios( servicioLocal.eliminarComentario(local,comentario.getId()) );
-        servicioLocal.guardarLocal(local);
-        locales = servicioLocal.cargarLocales();
-    }
-    */
-    
     
 }

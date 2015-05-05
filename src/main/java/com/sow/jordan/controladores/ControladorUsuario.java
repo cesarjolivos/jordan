@@ -104,6 +104,32 @@ public class ControladorUsuario implements Serializable {
         this.servicioUsuario.eliminarUsuario(usuario);
         usuarios = servicioUsuario.cargarUsuarios();
     }
+    
+    /**
+     * Método que otorga privilegio de administrador al usuario que recibe como
+     * parametro.
+     * @param usuario El usuario a otrogar privilegio. 
+     */
+    public void privilegioDeAdmiistrador(Usuario usuario){
+        this.usuario = usuario;
+        this.usuario.setPrivilegio("ROLE_ADMIN");
+        servicioUsuario.guardarUsuario(usuario);
+        usuarios =servicioUsuario.cargarUsuarios();
+        this.usuario = new Usuario();
+    }
+    
+    /**
+     * Método que otorga privilegio de usuerio registrado al usuario que recibe 
+     * como parametro.
+     * @param usuario El usuario a otrogar privilegio. 
+     */
+    public void privilegioDeUsuario(Usuario usuario){
+        this.usuario = usuario;
+        this.usuario.setPrivilegio("ROLE_USER");
+        servicioUsuario.guardarUsuario(usuario);
+        usuarios =servicioUsuario.cargarUsuarios();
+        this.usuario = new Usuario();
+    }
 
     /**
      * Método que regresa los usuarios del sistema.

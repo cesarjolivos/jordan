@@ -20,7 +20,8 @@
                     <p:menubar styleClass="centrado">
                         <p:menuitem value="INICIO" url="../jordan" style="margin: 10pt"/>
                         <p:menuitem>
-                            <p:selectOneMenu value="elige" style="margin: 7pt">
+                            <p:selectOneMenu value="#{controladorLocal.opciónDeBúsqueda}" 
+                                             style="margin: 7pt">
                                 <f:selectItem itemLabel="Categoría de Búsqueda" itemValue=""/>
                                 <f:selectItem itemLabel="Comida" itemValue="Comida" />
                                 <f:selectItem itemLabel="Local" itemValue="Local" />
@@ -28,8 +29,11 @@
                             </p:selectOneMenu>
                         </p:menuitem>
                         <p:menuitem>
-                            <p:inputText placeholder="Buscqueda" style="margin: 5pt;margin-right: 0pt"/>
-                            <p:button icon="ui-icon-search" title="Buscar" style="margin: 5pt; margin-left: 0pt"/>
+                            <p:inputText placeholder="Busqueda" style="margin: 5pt;margin-right: 0pt"
+                                         value="#{controladorLocal.busqueda}"/>
+                            <p:button icon="ui-icon-search" title="Buscar" 
+                                      style="margin: 5pt; margin-left: 0pt"
+                                      />
                         </p:menuitem>
                         <p:menuitem rendered="#{!controladorSesión.sesionIniciada}">
                             <p:commandButton icon="ui-icon-key" onclick="PF('logeo').show();"

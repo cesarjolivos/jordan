@@ -116,7 +116,7 @@ Pagina que muestra las funciones del administrador.
                             <p:selectOneMenu id="transpotorte" value="#{controladorLocal.idTransporte}" style="width:150px">
                                 <f:selectItem itemLabel="Seleccione una estación" itemValue="" noSelectionOption="true" />
                                 <f:selectItems value="#{controladorLocal.transportes}" var="_transporte"  
-                                               itemLabel="#{_transporte.estacion}" itemValue="#{_transporte.id}" />
+                                               itemLabel="#{_transporte.estación}" itemValue="#{_transporte.id}" />
                             </p:selectOneMenu>
                             <p:commandButton actionListener="#{controladorLocal.guardarTransporte()}"
                                              value="Agregar Transporte" update=":agregar @form"  />
@@ -150,7 +150,7 @@ Pagina que muestra las funciones del administrador.
                                         #{_transporte.tipo}
                                     </p:column>
                                     <p:column headerText="Estación" style="width:80px">
-                                        #{_transporte.estacion}
+                                        #{_transporte.estación}
                                     </p:column>
                                     <p:column style="width: 80px">
                                         <p:commandButton value="Borrar" update=":agregar @form"

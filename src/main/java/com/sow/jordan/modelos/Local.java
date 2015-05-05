@@ -4,6 +4,7 @@
 package com.sow.jordan.modelos;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
@@ -319,6 +320,16 @@ public class Local implements Serializable {
      */
     public void setCalificación(double calificación) {
         this.calificación = calificación;
+    }
+    
+    public void actualizarCalificacion(){
+        Iterator<Comentario> it = comentarios.iterator();
+        int suma = 0, n = 0;
+        while(it.hasNext()){
+            Comentario c = it.next();
+            suma += c.getCalificación(); n++;
+        }
+        setCalificación(suma/n);
     }
     
     /**
