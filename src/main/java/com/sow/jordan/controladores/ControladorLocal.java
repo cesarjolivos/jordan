@@ -11,10 +11,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
-import org.primefaces.model.map.DefaultMapModel;
-import org.primefaces.model.map.LatLng;
-import org.primefaces.model.map.MapModel;
-import org.primefaces.model.map.Marker;
+import org.primefaces.model.map.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -108,6 +105,7 @@ public class ControladorLocal implements Serializable {
         servicio = new Servicio();
         menú = new Menú();
         transporte = new Transporte();
+        comentario = new Comentario();
     }
     
     /**
@@ -139,13 +137,6 @@ public class ControladorLocal implements Serializable {
         transporte = servicioLocal.buscarTransporte(idTransporte);
         local.getTransportes().add(transporte);
         transporte = new Transporte();
-    }
-    
-    public void guardarComentario(){
-        local.getComentarios().remove(comentario);
-        local.getComentarios().add(comentario);
-        servicioLocal.guardarLocal(local);
-        locales = servicioLocal.cargarLocales();
     }
     
     /**
@@ -426,25 +417,6 @@ public class ControladorLocal implements Serializable {
         transportes = servicioLocal.porTipos(this.tipo);
     }
     
-    public boolean getSesionIniciada(ControladorSesión controladorSesión){
-        usuario = controladorSesión.getUsuario();
-        comentario = servicioLocal.buscarComentario(local, usuario);
-        if(comentario == null){
-            comentario = new Comentario();
-            comentario.setLocal(local);
-            comentario.setUsuario(usuario);
-        }
-        return controladorSesión.getSesionIniciada();
-    }
-
-    public Comentario getComentario() {
-        return comentario;
-    }
-
-    public void setComentario(Comentario comentario) {
-        this.comentario = comentario;
-    }
-    
     /**
      * Método que regresa la posición que ocupa un local en la lista de top 5.
      * @return Un entero con la información.
@@ -478,6 +450,62 @@ public class ControladorLocal implements Serializable {
     public void imagenServicio(FileUploadEvent event) {
         UploadedFile file = event.getFile();
         this.servicio.setImagen(file.getContents());
+    }
+    
+    /**
+    public boolean getSesionIniciada(ControladorSesión controladorSesión) {
+        usuario = controladorSesión.getUsuario();
+        comentario = servicioLocal.buscarComentario(local, usuario);
+        if (comentario == null) {
+            comentario = new Comentario();
+            comentario.setLocal(local);
+            comentario.setUsuario(usuario);
+        }
+        return controladorSesión.getSesionIniciada();
+    }
+    
+    public void guardarComentario(){
+        local.getComentarios().remove(comentario);
+        local.getComentarios().add(comentario);
+        servicioLocal.guardarLocal(local);
+        locales = servicioLocal.cargarLocales();
+    }
+    */
+    
+    /**
+     * 
+     * @return 
+     */
+    public Comentario getComentario() {
+        return comentario;
+    }
+
+    /**
+     * 
+     * @param comentario 
+     */
+    public void setComentario(Comentario comentario) {
+        this.comentario = comentario;
+    }
+    
+    public boolean sesionIniciada(ControladorSesión controladorSesión) {
+        usuario = controladorSesión.getUsuario();
+        comentario = servicioLocal.buscarComentario(local, usuario);
+        if(comentario == null){
+            comentario = new Comentario();
+        }
+        return controladorSesión.getSesionIniciada();
+    }
+    
+    public void guardarComentario(){
+        comentario.setUsuario(usuario);
+        local.getComentarios().add(comentario);
+        servicioLocal.guardarLocal(local);
+        locales = servicioLocal.cargarLocales();
+    }
+    
+    public void eliminarComentario(Comentario comentario) {
+        this.local.getComentarios().remove(comentario);
     }
     
 }

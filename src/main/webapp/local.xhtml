@@ -89,20 +89,17 @@ Pagina que muestra la información de un local.
                 </f:facet>
                 <h:outputText value="#{controladorLocal.local.descripción}"/>
             </p:panelGrid><br/>
-            <h:form id="Coment" rendered="#{controladorLocal.getSesionIniciada(controladorSesión)}">      
+            <h:form id="Coment" rendered="#{controladorLocal.sesionIniciada(controladorSesión)}">      
                 <h:panelGrid id="edicion" columns="1" width="100%">
                     <h:panelGrid columns="2" width="100%">
                         <h:outputText value="Comentario"/>
                         <h:panelGrid columns="2" cellpadding="5" style="text-align: right">
                             <h:outputText value="Puntuación: " />
                             <p:rating value="#{controladorLocal.comentario.calificación}"/>
-                            <!--p:rating value="{controladorLocal.comentario.calificación}"/-->
                         </h:panelGrid>
                     </h:panelGrid>
                     <p:inputTextarea id="comentario" style="width:99%" rows="2" placeholder="Comentario" 
                                      value="#{controladorLocal.comentario.comentario}"/>
-                    <!--p:inputTextarea id="comentario" style="width:99%" rows="2" placeholder="Comentario" 
-                                     value="{controladorLocal.comentario.comentario}"/-->
                 </h:panelGrid>
                 <p:commandButton 
                     value="Publicar" update=":publicacion @form" ajax="true" style="float: left"
@@ -122,8 +119,6 @@ Pagina que muestra la información de un local.
                     <p:panelGrid columns="3" style="width: 100%">
                         <p:outputLabel value="#{_comentario.usuario.usuario}" />
                         <p:outputLabel value="#{_comentario.comentario}" />
-                        <p:commandButton rendered="#{controladorLogeo.esAdministrador()}" 
-                                         value="Borrar" style="width: 100px; float: right; margin-right: 10%"/>
                     </p:panelGrid>
                 </p:dataScroller>
             </h:form><br/>
