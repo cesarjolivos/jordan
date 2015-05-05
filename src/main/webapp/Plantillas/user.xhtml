@@ -38,7 +38,6 @@
                         <p:menuitem rendered="#{controladorSesión.sesionIniciada}">
                             <h:panelGrid columns="3" style="margin: 5pt">
                                 <h:link outcome="#{controladorSesión.url()}" value="#{controladorSesión.usuario.nombre}" />
-                                <!--p:commandLink action="{controladorSesión.url()}" value="{controladorSesión.usuario.nombre}" /-->
                                 <form action="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout" method="POST">
                                 </form>
                                 <form action="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout" method="POST">

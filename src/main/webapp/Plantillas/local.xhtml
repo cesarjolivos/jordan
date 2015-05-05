@@ -33,7 +33,7 @@
                             </p:selectOneMenu>
                         </p:menuitem>
                         <p:menuitem>
-                            <p:inputText placeholder="Buscqueda" style="margin: 5pt;margin-right: 0pt"/>
+                            <p:inputText placeholder="Busqueda" style="margin: 5pt;margin-right: 0pt"/>
                             <p:button icon="ui-icon-search" title="Buscar" style="margin: 5pt; margin-left: 0pt"/>
                         </p:menuitem>
                         <p:menuitem rendered="#{!controladorSesión.sesionIniciada}">
@@ -43,7 +43,6 @@
                         <p:menuitem rendered="#{controladorSesión.sesionIniciada}">
                             <h:panelGrid columns="3" style="margin: 5pt">
                                 <h:link outcome="#{controladorSesión.url()}" value="#{controladorSesión.usuario.nombre}" />
-                                <!--p:commandLink action="{controladorSesión.url()}" value="{controladorSesión.usuario.nombre}" /-->
                                 <form action="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout" method="POST">
                                 </form>
                                 <form action="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout" method="POST">
