@@ -192,4 +192,16 @@ public class ServicioLocalImplementacion implements ServicioLocal {
         return repositorioLocal.comentarios(local, usuario);
     }
     
+    /**
+     * Método que elimina un usuario de la base de datos
+     * @param local El local.
+     * @param id El id del comentario a eliminar.
+     * @return Una lista que regresa los comentarios del local sin el comentario.
+     */
+    @Override
+    public List<Comentario> eliminarComentario(Local local, Integer id){
+        //return repositorioLocal.eliminarComentario(local, id);
+        return null;
+    }
+    
 }

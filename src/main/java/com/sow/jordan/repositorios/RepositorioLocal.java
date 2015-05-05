@@ -49,8 +49,24 @@ public interface RepositorioLocal extends CrudRepository<Local, Integer>{
             + "AND comentario.usuario = ?")
     Comentario buscarComentario(Local local, Usuario usuario);
     
+    /**
+     * Método que regresa los comentarios de un local, que no sean del usuario 
+     * que recibe como parametro.
+     * @param local El local.
+     * @param usuario El usuario del que no se agrega el comentario.
+     * @return Una lista con la información.
+     */
     @Query("SELECT comentario FROM Comentario comentario WHERE comentario.local = ?"
             + "AND comentario.usuario != ?")
     List<Comentario> comentarios(Local local, Usuario usuario);
+    
+    /**
+     * Método que elimina un usuario de la base de datos
+     * @param local El local.
+     * @param comentario El comentario a eliminar.
+     * @return Una lista que regresa los comentarios del local sin el comentario.
+     */
+    @Query("SELECT comentario FROM Comentario comentario WHERE comentario.id != ?")
+    List<Comentario> eliminarComentario(Local local, Integer id);
     
 }

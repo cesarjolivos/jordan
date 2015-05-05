@@ -499,13 +499,16 @@ public class ControladorLocal implements Serializable {
     
     public void guardarComentario(){
         comentario.setUsuario(usuario);
+        local.setComentarios( servicioLocal.comentarios(local, usuario) );
         local.getComentarios().add(comentario);
         servicioLocal.guardarLocal(local);
         locales = servicioLocal.cargarLocales();
     }
     
     public void eliminarComentario(Comentario comentario) {
-        //this.local.getComentarios().remove(comentario);
+        local.setComentarios( new ArrayList<Comentario>() );
+        servicioLocal.guardarLocal(local);
+        locales = servicioLocal.cargarLocales();
     }
     
 }
