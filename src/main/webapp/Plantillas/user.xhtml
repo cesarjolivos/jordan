@@ -31,9 +31,9 @@
                         <p:menuitem>
                             <p:inputText placeholder="Busqueda" style="margin: 5pt;margin-right: 0pt"
                                          value="#{controladorLocal.busqueda}"/>
-                            <p:button icon="ui-icon-search" title="Buscar" 
-                                      style="margin: 5pt; margin-left: 0pt"
-                                      />
+                            <p:commandButton icon="ui-icon-search" title="Buscar"
+                                style="margin: 5pt; margin-left: 0pt" action="busqueda"
+                                actionListener="#{controladorLocal.realizarBúsqueda()}"/>
                         </p:menuitem>
                         <p:menuitem rendered="#{!controladorSesión.sesionIniciada}">
                             <p:commandButton icon="ui-icon-key" onclick="PF('logeo').show();"

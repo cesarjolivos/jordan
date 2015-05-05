@@ -17,6 +17,11 @@
             <to-view-id>local.xhtml</to-view-id>
             <redirect/>
         </navigation-case>
+        <navigation-case>
+            <from-action>busqueda</from-action>
+            <to-view-id>busqueda.xhtml</to-view-id>
+            <redirect/>
+        </navigation-case>
     </navigation-rule>
     
 </faces-config>

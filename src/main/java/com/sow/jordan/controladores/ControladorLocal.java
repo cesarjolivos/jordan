@@ -47,6 +47,10 @@ public class ControladorLocal implements Serializable {
      */
     private Local local;
     /**
+     * Variable que almacena los resultados de la buequeda.
+     */
+    private List<Local> resultados;
+    /**
      * Variable que alamacena el catalogo de los lugares que hay en el sistema.
      */
     private List<Lugar> lugares;
@@ -95,7 +99,7 @@ public class ControladorLocal implements Serializable {
     private int posición;//indica la posición en el top 5
     private String opciónDeBúsqueda;//variable que almacena la opción de búsqueda.
     private String busqueda;//variable que almacena lo que se decea buscar.
-    private List<Local> resultados;
+    
     /**
      * Método que se ejecuta después de realizar la inyección de dependencias.
      */
@@ -270,6 +274,23 @@ public class ControladorLocal implements Serializable {
     public void setLocal(Local local) {
         this.local = local;
     }    
+    
+    /**
+     * Método que regresa los locales que cumplen con los parametros de las 
+     * busqueda.
+     * @return Una lista con los locales resultantes de la busqueda.
+     */
+    public List<Local> getResultados() {
+        return resultados;
+    }
+
+    /**
+     * Método que asigna un nuevo resultdo de la busqueda de los locales.
+     * @param resultados La lista con con los el nuevo resultado.
+     */
+    public void setResultados(List<Local> resultados) {
+        this.resultados = resultados;
+    }
     
     /**
      * Método que regresa el mapa para ver el local.
@@ -553,14 +574,6 @@ public class ControladorLocal implements Serializable {
     public void imagenServicio(FileUploadEvent event) {
         UploadedFile file = event.getFile();
         this.servicio.setImagen(file.getContents());
-    }
-
-    public List<Local> getResultados() {
-        return resultados;
-    }
-
-    public void setResultados(List<Local> resultados) {
-        this.resultados = resultados;
     }
     
 }
