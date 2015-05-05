@@ -5,6 +5,7 @@ package com.sow.jordan.controladores;
 
 import com.sow.jordan.modelos.*;
 import com.sow.jordan.servicios.ServicioLocal;
+import com.sow.jordan.servicios.ServicioUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -505,10 +506,27 @@ public class ControladorLocal implements Serializable {
         locales = servicioLocal.cargarLocales();
     }
     
+    public void eliminarComentario(Usuario usuario) {
+        usuario = servicioUsuario.buscarUsuario(usuario.getUsuario());
+        local.setComentarios( servicioLocal.comentarios(local, usuario) );
+        servicioLocal.guardarLocal(local);
+        locales = servicioLocal.cargarLocales();
+        servicioUsuario.guardarUsuario(usuario);
+    }
+    
+    /**
+     * Variable que almacena el servicio de usuarios.
+     */
+    @Autowired
+    private ServicioUsuario servicioUsuario;
+        
+    /**
     public void eliminarComentario(Comentario comentario) {
-        local.setComentarios( new ArrayList<Comentario>() );
+        local.setComentarios( servicioLocal.eliminarComentario(local,comentario.getId()) );
         servicioLocal.guardarLocal(local);
         locales = servicioLocal.cargarLocales();
     }
+    */
+    
     
 }
