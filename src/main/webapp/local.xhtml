@@ -54,35 +54,29 @@ Pagina que muestra la información de un local.
             <h:panelGrid columns="1" width="100%">
                 <h:outputText value="Especialidad: #{controladorLocal.local.especialidad}"/>
             </h:panelGrid><br/>
-            <h:panelGrid columns="2">
-                <h:panelGrid style="width: 100%">
-                    <p:dataTable value="#{controladorLocal.local.menú}" 
-                                 var="_menú" scrollable="true" scrollHeight="150"> 
-                        <p:column headerText="Categoría" style="width:100px">
+            <p:dataTable value="#{controladorLocal.local.menú}" 
+                         var="_menú" scrollable="true" scrollHeight="100"> 
+                <p:column headerText="Categoría" style="width:100px">
                                     #{_menú.categoria}
-                        </p:column>
-                        <p:column headerText="Precio Min" style="width:80px">
+                </p:column>
+                <p:column headerText="Precio Min" style="width:80px">
                                     #{_menú.precioMin}
-                        </p:column>
-                        <p:column headerText="Precio Max" style="width: 80px">
+                </p:column>
+                <p:column headerText="Precio Max" style="width: 80px">
                                     #{_menú.precioMax}
-                        </p:column>
-                    </p:dataTable>﻿
-                </h:panelGrid>
-                <h:panelGrid style="width: 55%; float: right; margin-right: 10%">
-                    <p:dataTable value="#{controladorLocal.local.servicios}"
-                                 var="_servicio" scrollable="true" scrollHeight="150">                       
-                        <p:column style="width:30px;text-align:center">
-                            <h:graphicImage id="imagen" width="30px"
-                                            rendered="#{_servicio.imagen ne null}"
-                                            value="data:image/png;base64,#{_servicio.imagenUrl}"/> 
-                        </p:column>
-                        <p:column headerText="Seleccione los servicio" >
+                </p:column>
+            </p:dataTable>﻿
+            <p:dataTable value="#{controladorLocal.local.servicios}"
+                         var="_servicio" scrollable="true" scrollHeight="100">                       
+                <p:column style="width:30px;text-align:center">
+                    <h:graphicImage id="imagen" width="30px"
+                                    rendered="#{_servicio.imagen ne null}"
+                                    value="data:image/png;base64,#{_servicio.imagenUrl}"/> 
+                </p:column>
+                <p:column headerText="Seleccione los servicio" >
                                     #{_servicio.nombre}
-                        </p:column>
-                    </p:dataTable>
-                </h:panelGrid>
-            </h:panelGrid>
+                </p:column>
+            </p:dataTable>
             <p:panelGrid columns="1" style="width: 100%"> 
                 <f:facet name="header">
                     <p:column>Descripción</p:column>
@@ -102,14 +96,9 @@ Pagina que muestra la información de un local.
                                      value="#{controladorLocal.comentario.comentario}"/>
                 </h:panelGrid>
                 <p:commandButton 
-                    value="Publicar" update=":publicacion @form" ajax="false" style="float: left"
-                    actionListener="#{controladorLocal.guardarComentario()}"
-                    />
-                <!--p:commandButton 
                     value="Publicar" update=":publicacion @form" ajax="true" style="float: left"
-                    actionListener="{controladorLocal.guardarComentario(controladorLogeo.nombre)}"
-                    onsuccess="PF('redes').show();"
-                    /-->
+                    actionListener="#{controladorLocal.guardarComentario()}"
+                    onsuccess="PF('redes').show();"/>
                 <br/><br/>
             </h:form><br/>
             <h:form id="publicacion" style="width: 100%">
