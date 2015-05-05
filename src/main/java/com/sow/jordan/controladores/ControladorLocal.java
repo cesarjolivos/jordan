@@ -555,7 +555,10 @@ public class ControladorLocal implements Serializable {
      * Método que realiza la busqueda.
      */
     public void realizarBúsqueda(){
-        
+        posición = 1;
+        if (opciónDeBúsqueda.equals("Local")) {
+            resultados = servicioLocal.buscarPorNombre(busqueda);
+        }
     }
     
     /**

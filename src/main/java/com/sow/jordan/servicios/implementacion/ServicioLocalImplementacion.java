@@ -127,6 +127,16 @@ public class ServicioLocalImplementacion implements ServicioLocal {
     }
     
     /**
+     * Método que se encarga de buscar un local por medio de su nombre o alias.
+     * @param local El nombre o alias del local.
+     * @return Una lista con el resultado de la busqueda.
+     */
+    @Override
+    public List<Local> buscarPorNombre(String local){
+        return repositorioLocal.buscarPorNombre(local,local);
+    }
+    
+    /**
      * Método que busca un lugar mediante su id.
      * @param id El id del lugar.
      * @return Una lista con la información

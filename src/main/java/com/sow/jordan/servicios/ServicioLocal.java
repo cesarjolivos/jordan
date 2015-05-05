@@ -81,6 +81,13 @@ public interface ServicioLocal {
     Local buscarLocal(int id);
     
     /**
+     * Método que se encarga de buscar un local por medio de su nombre o alias.
+     * @param nombre El nombre o alias del local.
+     * @return Una lista con el resultado de la busqueda.
+     */
+    List<Local> buscarPorNombre(String nombre);
+    
+    /**
      * Método que busca un lugar mediante su id.
      * @param id El id del lugar.
      * @return Una lista con la información
