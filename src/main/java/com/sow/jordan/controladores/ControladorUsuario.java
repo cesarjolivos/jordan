@@ -6,15 +6,8 @@ package com.sow.jordan.controladores;
 import com.sow.jordan.modelos.Usuario;
 import com.sow.jordan.servicios.ServicioUsuario;
 import java.io.Serializable;
-/**
-import java.security.*;
-*/
 import java.util.List;
 import javax.annotation.PostConstruct;
-/**
-import javax.crypto.*;
-import javax.crypto.spec.SecretKeySpec;
-*/
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,49 +66,14 @@ public class ControladorUsuario implements Serializable {
      * Método que recupera la contraseña y la enviá por correo electrónico.
      */
     public void enviarContraseña() {
-        /**
-        String llaveSimetrica = "holamundocruel12";
-        SecretKeySpec key = new SecretKeySpec(llaveSimetrica.getBytes(), "AES");
-        Cipher cipher;
-        usuarios = servicioUsuario.buscarPorCorreo(usuario.getCorreo());
         SimpleMailMessage mail = new SimpleMailMessage();
         if (this.usuarios.isEmpty() == false) {
             for (Usuario u : this.usuarios) {
-                try {
-                    cipher = Cipher.getInstance("AES");
-                    cipher.init(Cipher.DECRYPT_MODE, key);
-                    byte[] datosDecifrados = cipher.doFinal(u.getCifrado());
-                    String contrasenia = new String(datosDecifrados);
-                    mail.setTo(u.getCorreo());
-                    mail.setFrom("jordan.dantm@gmail.com");
-                    mail.setSubject("JORDAN");
-                    mail.setText("RECUPERACION DE CONTRASEÑA\n\n\n" + "Hola "
-                            + u.getNombre() + " tu contraseña es: " + contrasenia);
-                    try {
-                        mailSender.send(mail);
-                        addMessage("Tu contraseña ha sido enviada al correo que "
-                                + "proporcionaste");
-                    } catch (MailException ex) {
-                        addMessage("No se pudo enviar el mensaje");
-                    }
-                } catch (NoSuchAlgorithmException | NoSuchPaddingException |
-                        InvalidKeyException | IllegalBlockSizeException |
-                        BadPaddingException e) {
-                    addMessage("No se pudo desencriptar");
-                }
-            }
-        } else {
-            addMessage("El correo que proporcionaste no existe en el registro");
-        }*/
-        SimpleMailMessage mail = new SimpleMailMessage();
-        if (this.usuarios.isEmpty() == false) {
-            for (Usuario u : this.usuarios) {
-                String contrasenia = u.getContraseña();
                 mail.setTo(u.getCorreo());
                 mail.setFrom("jordan.dantm@gmail.com");
                 mail.setSubject("JORDAN");
                 mail.setText("RECUPERACION DE CONTRASEÑA\n\n\n" + "Hola "
-                        + u.getNombre() + " tu contraseña es: " + contrasenia);
+                        + u.getNombre() + " tu contraseña es: " + u.getCifrado());
                 try {
                     mailSender.send(mail);
                     addMessage("Tu contraseña ha sido enviada al correo que "

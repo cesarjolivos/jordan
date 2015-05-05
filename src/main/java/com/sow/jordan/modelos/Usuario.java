@@ -52,9 +52,9 @@ public class Usuario implements Serializable {
     @NotNull
     private Boolean activo; 
     /**
-     * 
+     * Variable que almacena la celntraseña cifreda.
      */
-    private byte[] cifrado;
+    private String cifrado;
     
     /**
      * Variable que almacena los comentarios que a realizado el usuario.
@@ -91,15 +91,16 @@ public class Usuario implements Serializable {
      * @param contraseña La nueva contraseña.
      */
     public void setContraseña(String contraseña) {
+        cifrado = contraseña;
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             byte[] b = md.digest(contraseña.getBytes());
             int size = b.length;
-            StringBuffer h = new StringBuffer(size);
+            StringBuilder h = new StringBuilder(size);
             for (int i = 0; i < size; i++) {
                 int u = b[i] & 255;
                 if (u < 16) {
-                    h.append("0" + Integer.toHexString(u));
+                    h.append("0").append(Integer.toHexString(u));
                 } else {
                     h.append(Integer.toHexString(u));
                 }
@@ -189,23 +190,23 @@ public class Usuario implements Serializable {
     public void setComentarios(List<Comentario> comentarios) {
         this.comentarios = comentarios;
     }
-    
+
     /**
-     * 
-     * @return 
+     * Método que regresa la contraseña cifrada.
+     * @return La contraseña.
      */
-    public byte[] getCifrado() {
+    public String getCifrado() {
         return cifrado;
     }
 
     /**
-     * 
-     * @param cifrado 
+     * Método que asigna una contraseña cifrada.
+     * @param cifrado La contraseña cifrada.
      */
-    public void setCifrado(byte[] cifrado) {
+    public void setCifrado(String cifrado) {
         this.cifrado = cifrado;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 3;
