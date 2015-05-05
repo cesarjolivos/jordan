@@ -49,4 +49,8 @@ public interface RepositorioLocal extends CrudRepository<Local, Integer>{
             + "AND comentario.usuario = ?")
     Comentario buscarComentario(Local local, Usuario usuario);
     
+    @Query("SELECT comentario FROM Comentario comentario WHERE comentario.local = ?"
+            + "AND comentario.usuario != ?")
+    List<Comentario> comentarios(Local local, Usuario usuario);
+    
 }

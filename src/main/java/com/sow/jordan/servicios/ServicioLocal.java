@@ -123,4 +123,6 @@ public interface ServicioLocal {
      */
     Comentario buscarComentario(Local local, Usuario usuario);
     
+    List<Comentario> comentarios(Local local, Usuario usuario);
+    
 }
