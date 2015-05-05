@@ -38,6 +38,10 @@ public class ControladorSesión implements Serializable {
      * Variable que indica si la sesión esta iniciada.
      */
     private boolean sesionIniciada = false;
+    /**
+     * Variable que almacena si el usuario es administrador.
+     */
+    private boolean administrador = false;
     
     /**
      * Método que obtiene el usuario que a iniciado sesión.
@@ -72,14 +76,21 @@ public class ControladorSesión implements Serializable {
      * Método que indica si el usuario es administrador.
      * @return True en caso de ser administrador.
      */
-    public boolean esAdministrador(){
-        switch (usuario.getPrivilegio()) {
-            case "ROLE_ADMIN":
-                return true;
-            case "ROLE_ROOT":
-                return true;
+    public boolean getAdministrador(){
+        if(sesionIniciada){
+            switch (usuario.getPrivilegio()) {
+                case "ROLE_ADMIN":
+                    administrador = true;
+                    return administrador;
+                case "ROLE_ROOT":
+                    administrador = true;
+                    return administrador;
+            }
+            administrador = false;
+            return administrador;
         }
-        return false;
+        administrador = false;
+        return administrador;
     }
 
     /**

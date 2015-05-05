@@ -119,6 +119,9 @@ Pagina que muestra la información de un local.
                     <p:panelGrid columns="3" style="width: 100%">
                         <p:outputLabel value="#{_comentario.usuario.usuario}" />
                         <p:outputLabel value="#{_comentario.comentario}" />
+                        <p:commandButton rendered="#{controladorSesión.administrador}" update=":publicacion @form"
+                                         actionListener="#{controladorLocal.eliminarComentario(_comentario)}"
+                                         value="Borrar" style="width: 100px; float: right; margin-right: 10%"/>
                     </p:panelGrid>
                 </p:dataScroller>
             </h:form><br/>

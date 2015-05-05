@@ -505,7 +505,7 @@ public class ControladorLocal implements Serializable {
     }
     
     public void eliminarComentario(Comentario comentario) {
-        this.local.getComentarios().remove(comentario);
+        //this.local.getComentarios().remove(comentario);
     }
     
 }
