@@ -4,11 +4,10 @@
 package com.sow.jordan.modelos;
 
 import java.io.Serializable;
-//import java.security.*;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Objects;
-//import javax.crypto.*;
-//import javax.crypto.spec.SecretKeySpec;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -92,20 +91,23 @@ public class Usuario implements Serializable {
      * @param contraseña La nueva contraseña.
      */
     public void setContraseña(String contraseña) {
-        /**
-        String llaveSimetrica = "holamundocruel12";
-        SecretKeySpec key = new SecretKeySpec(llaveSimetrica.getBytes(), "AES");
-        Cipher cipher;
         try {
-            cipher = Cipher.getInstance("AES");
-            cipher.init(Cipher.ENCRYPT_MODE, key);
-            byte[] campoCifrado = cipher.doFinal(contraseña.getBytes());
-            cifrado = campoCifrado;
-            this.contraseña = new String(campoCifrado);
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException 
-                | IllegalBlockSizeException | BadPaddingException e) {
-        }*/
-        this.contraseña = contraseña;
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            byte[] b = md.digest(contraseña.getBytes());
+            int size = b.length;
+            StringBuffer h = new StringBuffer(size);
+            for (int i = 0; i < size; i++) {
+                int u = b[i] & 255;
+                if (u < 16) {
+                    h.append("0" + Integer.toHexString(u));
+                } else {
+                    h.append(Integer.toHexString(u));
+                }
+            }
+            this.contraseña = h.toString();
+        } catch (NoSuchAlgorithmException ex) {
+            
+        }
     }
 
     /**
