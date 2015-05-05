@@ -558,6 +558,8 @@ public class ControladorLocal implements Serializable {
         posición = 1;
         if (opciónDeBúsqueda.equals("Local")) {
             resultados = servicioLocal.buscarPorNombre(busqueda);
+        } else if(opciónDeBúsqueda.equals("Lugar")){
+            resultados = servicioLocal.buscarPorLugar(busqueda);
         }
     }
     

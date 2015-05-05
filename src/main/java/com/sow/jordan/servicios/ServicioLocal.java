@@ -88,6 +88,14 @@ public interface ServicioLocal {
     List<Local> buscarPorNombre(String nombre);
     
     /**
+     * Método que se encarga de buscar un local que se encuentre en el lugar 
+     * indicado.
+     * @param lugar El lugar donde se pretende buscar los locales.
+     * @return Una lista con el resultado de la busqueda.
+     */
+    List<Local> buscarPorLugar(String lugar);
+    
+    /**
      * Método que busca un lugar mediante su id.
      * @param id El id del lugar.
      * @return Una lista con la información

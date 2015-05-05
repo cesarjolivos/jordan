@@ -42,6 +42,15 @@ public interface RepositorioLocal extends CrudRepository<Local, Integer>{
     List<Local> buscarPorNombre(String nombre,String alias);
     
     /**
+     * Método que se encarga de buscar un local que se encuentre en el lugar 
+     * indicado.
+     * @param lugar El lugar donde se pretende buscar los locales.
+     * @return Una lista con el resultado de la busqueda.
+     */
+    @Query("SELECT local FROM Local local WHERE local.lugar.nombre LIKE CONCAT('%',?,'%')")
+    List<Local> buscarPorLugar(String lugar);
+    
+    /**
      * Método que carga los comentarios del local que resibe como parametro.
      * @param local El local que se desea obtener los comentarios.
      * @return Una lista con la información.
