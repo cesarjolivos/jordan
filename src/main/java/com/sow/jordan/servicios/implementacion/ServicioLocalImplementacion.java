@@ -137,14 +137,23 @@ public class ServicioLocalImplementacion implements ServicioLocal {
     }
     
     /**
-     * Método que se encarga de buscar un local que se encuentre en el lugar 
-     * indicado.
+     * Método que busca los locales que se encuentre en el lugar indicado.
      * @param lugar El lugar donde se pretende buscar los locales.
      * @return Una lista con el resultado de la busqueda.
      */
     @Override
     public List<Local> buscarPorLugar(String lugar){
         return repositorioLocal.buscarPorLugar(lugar);
+    }
+    
+    /**
+     * Método que busca los locales que contenga una categoria de un menú.
+     * @param categoria La categoria que deben tener.
+     * @return Una lista con el resultado de la busqueda.
+     */
+    @Override
+    public List<Local> buscarPorMenú(String categoria){
+        return repositorioLocal.buscarPorMenú(categoria);
     }
     
     /**

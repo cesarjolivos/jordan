@@ -32,7 +32,7 @@ public interface RepositorioLocal extends CrudRepository<Local, Integer>{
     Local buscarLocal(Integer id);
     
     /**
-     * Método que se encarga de buscar un local por medio de su nombre o alias.
+     * Método que busca los locales por medio de su nombre o alias.
      * @param nombre El nombre del local.
      * @param alias El alias del local.
      * @return Una lista con el resultado de la busqueda.
@@ -42,13 +42,23 @@ public interface RepositorioLocal extends CrudRepository<Local, Integer>{
     List<Local> buscarPorNombre(String nombre,String alias);
     
     /**
-     * Método que se encarga de buscar un local que se encuentre en el lugar 
-     * indicado.
+     * Método que busca los locales que se encuentre en el lugar indicado.
      * @param lugar El lugar donde se pretende buscar los locales.
      * @return Una lista con el resultado de la busqueda.
      */
     @Query("SELECT local FROM Local local WHERE local.lugar.nombre LIKE CONCAT('%',?,'%')")
     List<Local> buscarPorLugar(String lugar);
+    
+    /**
+     * Método que busca los locales que contenga una categoria de un menú.
+     * @param categoria La categoria que deben tener.
+     * @return Una lista con el resultado de la busqueda.
+     */
+    //@Query("SELECT local FROM Local local WHERE local IN "
+    //        + "(SELECT menú.local FROM Menú menú WHERE menú.categoria LIKE CONCAT('%',?,'%') ) ")
+    @Query("SELECT l FROM Local l WHERE l IN "
+            + "(SELECT m.local FROM Menú m WHERE m.categoria LIKE CONCAT('%',?,'%') ) ")
+    List<Local> buscarPorMenú(String categoria);
     
     /**
      * Método que carga los comentarios del local que resibe como parametro.

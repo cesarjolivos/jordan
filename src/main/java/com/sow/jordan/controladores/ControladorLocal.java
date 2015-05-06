@@ -556,10 +556,16 @@ public class ControladorLocal implements Serializable {
      */
     public void realizarBúsqueda(){
         posición = 1;
-        if (opciónDeBúsqueda.equals("Local")) {
-            resultados = servicioLocal.buscarPorNombre(busqueda);
-        } else if(opciónDeBúsqueda.equals("Lugar")){
-            resultados = servicioLocal.buscarPorLugar(busqueda);
+        switch (opciónDeBúsqueda) {
+            case "Local":
+                resultados = servicioLocal.buscarPorNombre(busqueda);
+                break;
+            case "Lugar":
+                resultados = servicioLocal.buscarPorLugar(busqueda);
+                break;
+            case "Comida":
+                resultados = servicioLocal.buscarPorMenú(busqueda);
+                break;
         }
     }
     
