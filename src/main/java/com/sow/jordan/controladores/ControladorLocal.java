@@ -555,6 +555,7 @@ public class ControladorLocal implements Serializable {
      * Método que realiza la busqueda.
      */
     public void realizarBúsqueda(){
+        busqueda = "";
         posición = 1;
         switch (opciónDeBúsqueda) {
             case "Local":
