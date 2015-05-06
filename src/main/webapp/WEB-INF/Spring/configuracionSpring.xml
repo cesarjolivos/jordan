@@ -62,7 +62,7 @@
     <!--Base de datos-->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
         <property name="driverClass" value="org.h2.Driver"/>
-        <property name="url" value="jdbc:h2:/home/olivos/Documentos/SistemaJordan/jordan/BaseDeDatos"/>
+        <property name="url" value="jdbc:h2:/home/olivos/Documentos/SistemaJordan/jordan/BaseDeDatos;IgnoreCase=TRUE"/>
         <!--property name="url" value="jdbc:h2:F:\Documentos\BasesDatos\BaseDeDatos"/-->
         <property name="username"  value="sa"/>
         <property name="password" value=""/>
