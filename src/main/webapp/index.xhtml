@@ -30,12 +30,12 @@ Pagina principal del sistema Jordan.
                         <h:panelGrid columns="1" width="80%" style="float: right; left: 5%">
                             <h:panelGrid columns="2" width="100%">
                                 <p:commandLink ajax="false" action="local" 
-                                               value="#{_local.nombre} (#{_local.alias}) #{_local.lugar.nombre}"
+                                               value="#{_local.nombre} (#{_local.alias}) #{_local.calificación}"
                                                actionListener="#{controladorLocal.setLocal(_local)}"
                                                style="font-size: 14pt"/>
                                 <h:panelGrid columns="2" >
                                     <p:outputLabel value="Puntuación:" style="font-size: 15pt"/>
-                                    <p:rating value="#{_local.calificación}" readonly="true"/>
+                                    <p:rating value="#{_local.evaluación}" readonly="true"/>
                                 </h:panelGrid>
                             </h:panelGrid>
                             <p style="font-size: 14pt">#{_local.descripción}</p>

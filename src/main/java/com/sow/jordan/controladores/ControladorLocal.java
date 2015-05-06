@@ -516,7 +516,7 @@ public class ControladorLocal implements Serializable {
      */
     public List<Local> getTop5() {
         posición = 1;
-        return locales;
+        return servicioLocal.top5();
     }
 
     /**

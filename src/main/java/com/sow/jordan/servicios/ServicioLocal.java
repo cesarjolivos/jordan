@@ -161,4 +161,10 @@ public interface ServicioLocal {
      */
     List<Comentario> eliminarComentario(Local local, Integer id);
     
+    /**
+     * Método que regresa la lista del top 5.
+     * @return Una lista de 5 locales con mejor puntuación.
+     */
+    List<Local> top5();
+    
 }

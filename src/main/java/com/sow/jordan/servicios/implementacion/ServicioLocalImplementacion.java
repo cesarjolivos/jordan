@@ -233,5 +233,13 @@ public class ServicioLocalImplementacion implements ServicioLocal {
         return repositorioLocal.eliminarComentario(local,id);
     }
     
+    /**
+     * Método que regresa la lista del top 5.
+     * @return Una lista de 5 locales con mejor puntuación.
+     */
+    @Override
+    public List<Local> top5(){
+        return repositorioLocal.top5();
+    }
     
 }

@@ -54,11 +54,16 @@ public interface RepositorioLocal extends CrudRepository<Local, Integer>{
      * @param categoria La categoria que deben tener.
      * @return Una lista con el resultado de la busqueda.
      */
-    //@Query("SELECT local FROM Local local WHERE local IN "
-    //        + "(SELECT menú.local FROM Menú menú WHERE menú.categoria LIKE CONCAT('%',?,'%') ) ")
-    @Query("SELECT l FROM Local l WHERE l IN "
-            + "(SELECT m.local FROM Menú m WHERE m.categoria LIKE CONCAT('%',?,'%') ) ")
+    @Query("SELECT local FROM Local local WHERE local IN "
+            + "(SELECT menú.local FROM Menú menú WHERE menú.categoria LIKE CONCAT('%',?,'%') ) ")
     List<Local> buscarPorMenú(String categoria);
+    
+    /**
+     * Método que regresa la lista del top 5.
+     * @return Una lista de 5 locales con mejor puntuación.
+     */
+    @Query("SELECT local FROM Local local ORDER BY local.calificación DESC")
+    List<Local> top5();
     
     /**
      * Método que carga los comentarios del local que resibe como parametro.
