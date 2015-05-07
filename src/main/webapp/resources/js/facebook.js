@@ -31,3 +31,9 @@ function publicaMensaje(message) {
     }, {scope: 'publish_actions'}
     );
 }
+
+function redireccionar(message) {
+    var pagina="https://twitter.com/intent/tweet?text=";
+    var url = pagina.concat(message);
+    location.href=url;
+} 

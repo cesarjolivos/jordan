@@ -16,6 +16,12 @@ import org.primefaces.model.map.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import twitter4j.Paging;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterException;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
 
 /**
  * Clase se encarga de conectar las vistas con los modelos del sistema, conecta
@@ -100,6 +106,8 @@ public class ControladorLocal implements Serializable {
     private String opciónDeBúsqueda;//variable que almacena la opción de búsqueda.
     private String busqueda;//variable que almacena lo que se decea buscar.
     
+    private String url="";
+    
     /**
      * Método que se ejecuta después de realizar la inyección de dependencias.
      */
@@ -155,6 +163,8 @@ public class ControladorLocal implements Serializable {
      * Método que guarda un comentario en la base de datos.
      */
     public void guardarComentario(){
+        String aux="https://twitter.com/intent/tweet?text=";
+        url=aux+comentario.getComentario();
         comentario.setUsuario(usuario);
         local.setComentarios( servicioLocal.comentarios(local, usuario) );
         local.getComentarios().add(comentario);
@@ -586,5 +596,15 @@ public class ControladorLocal implements Serializable {
         UploadedFile file = event.getFile();
         this.servicio.setImagen(file.getContents());
     }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
     
+    
+
 }
