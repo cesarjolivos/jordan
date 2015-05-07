@@ -57,18 +57,23 @@
                 <h:form id="busquedaAbanzada">
                     <p:accordionPanel activeIndex="-1" style="font-size: 15pt">
                         <p:tab id="titulo" title="Busqueda Avanzada" >
-                            <p:selectManyCheckbox layout="grid" columns="3" style="font-size: 150pt">
-                                <p:selectBooleanCheckbox itemLabel="Wi-Fi" value="Wi-Fi" style="margin: 15pt;font-size: 15pt"/>
-                                <p:selectBooleanCheckbox itemLabel="Metro" value="Metro" style="margin: 15pt;font-size: 15pt"/>
-                                <p:selectBooleanCheckbox itemLabel="Para Comer" value="Para Comer" style="margin: 15pt;font-size: 15pt"/>
-                                <p:selectBooleanCheckbox itemLabel="Baño" value="Baño" style="margin: 15pt;font-size: 15pt"/>
-                                <p:selectBooleanCheckbox itemLabel="Metrobús" value="Metrobús" style="margin: 15pt;font-size: 15pt"/>
-                                <p:selectBooleanCheckbox itemLabel="Para Llevar" value="Para Llear" style="margin: 15pt;font-size: 15pt"/>
-                                <p:selectBooleanCheckbox itemLabel="Estacionamiento" value="Estacionamiento" style="margin: 15pt;font-size: 15pt"/>
-                                <p:selectBooleanCheckbox itemLabel="Pumabús" value="Pumabús" style="margin: 15pt;font-size: 15pt"/>
-                                <p:selectBooleanCheckbox itemLabel="Bicipuma" value="Bicipuma" style="margin: 15pt;font-size: 15pt"/>
+                            <p:selectManyCheckbox 
+                                value="#{controladorLocal.bavan}">
+                                <f:selectItem itemLabel="Wi-Fi" itemValue="Wi-Fi" />
+                                <f:selectItem itemLabel="Estacionamiento" itemValue="Estacionamiento" />
+                                <f:selectItem itemLabel="Para Comer" itemValue="Comer" />
+                                <f:selectItem itemLabel="Para Llevar" itemValue="Llevar" />
+                                <f:selectItem itemLabel="Baño" itemValue="Baño" />
+                                <f:selectItem itemLabel="Metro" itemValue="Metro" />
+                                <f:selectItem itemLabel="Metrobús" itemValue="Metrobús" />
+                                <f:selectItem itemLabel="Pumabús" itemValue="Pumabús" />
+                                <f:selectItem itemLabel="Bicipuma" itemValue="Bicipuma" />
                             </p:selectManyCheckbox>
-                            <p:commandButton icon="ui-icon-search" value="Buscar" style="font-size: 15pt; alignment-adjust: central"/>
+                            <p:commandButton 
+                                action="busqueda"
+                                actionListener="#{controladorLocal.busquedaAvanzada}"
+                                icon="ui-icon-search" value="Buscar" 
+                                style="font-size: 15pt; alignment-adjust: central"/>
                         </p:tab>
                     </p:accordionPanel>
                 </h:form>

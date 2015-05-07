@@ -8,6 +8,7 @@ import com.sow.jordan.servicios.ServicioLocal;
 import com.sow.jordan.servicios.ServicioUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -100,7 +101,10 @@ public class ControladorLocal implements Serializable {
     private int posición;//indica la posición en el top 5
     private String opciónDeBúsqueda;//variable que almacena la opción de búsqueda.
     private String busqueda;//variable que almacena lo que se decea buscar.
-    
+    /**
+     * Variable para la búsqueda avanzada
+     */
+    private String[] bavan;
     /**
      * Método que se ejecuta después de realizar la inyección de dependencias.
      */
@@ -119,6 +123,8 @@ public class ControladorLocal implements Serializable {
         menú = new Menú();
         transporte = new Transporte();
         comentario = new Comentario();
+        resultados = servicioLocal.cargarLocales();
+        resultados.clear();
     }
     
     /**
@@ -282,6 +288,7 @@ public class ControladorLocal implements Serializable {
      * @return Una lista con los locales resultantes de la busqueda.
      */
     public List<Local> getResultados() {
+        posición=1;
         return resultados;
     }
 
@@ -595,5 +602,37 @@ public class ControladorLocal implements Serializable {
         UploadedFile file = event.getFile();
         this.servicio.setImagen(file.getContents());
     }
+
+    public String[] getBavan() {
+        return bavan;
+    }
+
+    public void setBavan(String[] bavan) {
+        this.bavan = bavan;
+    }
     
+    public void busquedaAvanzada() {
+        HashSet<Local> resul = new HashSet<>();
+        resultados.clear();
+        for (Local l : locales) {
+            for (Servicio s : l.getServicios()) {
+                for (String c : bavan) {
+                    if (s.getNombre().contains(c)) {
+                        resul.add(l);
+                    }
+                }
+            }
+        }
+        resultados.addAll(resul);
+    }
+
+    public String cantidad() {
+        String cad = "0";
+        System.out.println("--" + resultados.size());
+        for (int i = 1; i < resultados.size(); i++) {
+            cad += "," + i;
+        }
+        return cad;
+    }
+
 }
