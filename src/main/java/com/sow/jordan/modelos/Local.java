@@ -355,6 +355,19 @@ public class Local implements Serializable {
         }
     }
     
+    /**
+     * Método que muestra la información del establecimiento de comida.
+     * @return Un estrin con la información.
+     */
+    public String getInformación(){  
+        String información = "Ubicación: "+lugar.getNombre()+". "+descripción;
+        if(información.length()<=139){
+            return información;
+        } else{
+            return información.substring(0,139);
+        }
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;
