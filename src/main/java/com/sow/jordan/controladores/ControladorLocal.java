@@ -8,6 +8,7 @@ import com.sow.jordan.servicios.ServicioLocal;
 import com.sow.jordan.servicios.ServicioUsuario;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.primefaces.event.FileUploadEvent;
@@ -515,8 +516,16 @@ public class ControladorLocal implements Serializable {
      * @return Una lista de los mejores 5 locales.
      */
     public List<Local> getTop5() {
-        posición = 1;
-        return servicioLocal.top5();
+        posición = 1; 
+        int i = 1;
+        Iterator it = servicioLocal.top5().iterator();
+        List<Local> top = new ArrayList<>();
+        while(it.hasNext()){
+            top.add((Local) it.next());
+            if(i==5) break;
+            i++;
+        }
+        return top;
     }
 
     /**
