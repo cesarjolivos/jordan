@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <title>Jordan-Administración</title>
+    </h:head>
+    <h:body>
+        <div id="top" class="top">
+            <ui:insert name="top">
+
+                <h:form id="busqueda">
+                    <p:menubar styleClass="centrado">
+                        <p:menuitem value="INICIO" url="../jordan"
+                                    style="margin-right: 20pt; color: black; font-size: 20pt; float: left" />
+                    </p:menubar>
+                </h:form>
+
+            </ui:insert>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">
+                <h:form>
+                    <p:dataTable var="_usuario" value="#{controladorUsuario.usuarios}">
+                        <p:column headerText="Usuario">
+                            <h:outputText value="#{_usuario.usuario}" />
+                        </p:column>
+                        <p:column headerText="Privilegio">
+                            <h:outputText value="#{_usuario.privilegio}" />
+                        </p:column>
+                        <p:column headerText="Convertir a ROOT">
+                            <p:commandButton value="ROOT" update="@form"
+                                             actionListener="#{controladorUsuario.privilegioDeRoot(_usuario)}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:form>
+            </ui:insert>
+        </div>
+    </h:body>
+</html>
