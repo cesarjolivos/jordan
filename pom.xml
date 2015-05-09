@@ -4,7 +4,7 @@
 
     <groupId>com.sow.jordan</groupId>
     <artifactId>jordan</artifactId>
-    <version>1.0-NEW</version>
+    <version>1</version>
     <packaging>war</packaging>
 
     <name>jordan</name>
