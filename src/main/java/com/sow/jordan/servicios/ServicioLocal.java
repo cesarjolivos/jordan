@@ -38,10 +38,22 @@ public interface ServicioLocal {
     void guardarSercivio(Servicio servicio);
     
     /**
+     * Método para eliminar un servicio
+     * @param servicio El servicio a eliminar
+     */
+    void eliminarServicio(Servicio servicio);
+    
+    /**
      * Método para guardar la información de los transportes.
      * @param transporte El transporte a guardar.
      */
     void guardarTransporte(Transporte transporte);
+    
+    /**
+     * Método para eliminar un trasporte
+     * @param transporte Transporte a eliminar
+     */
+    void eliminarTransporteCat(Transporte transporte);
     
     /**
      * Método que carga la información de los locales.

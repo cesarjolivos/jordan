@@ -264,4 +264,13 @@ public class ServicioLocalImplementacion implements ServicioLocal {
         return repositorioLocal.top5();
     }
 
+    @Override
+    public void eliminarServicio(Servicio servicio) {
+        repositorioServicio.delete(servicio);
+    }
+
+    @Override
+    public void eliminarTransporteCat(Transporte transporte) {
+        repositorioTransporte.delete(transporte);
+    }
 }

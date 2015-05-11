@@ -24,16 +24,16 @@ window.fbAsyncInit = function () {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-function publicaMensaje(message) {
+function publicaMensaje(message,loc) {
     FB.login(function () {
         FB.api('/me/feed', 'post',
-                {message: message});
+                {message: 'En '+loc+': '+message+' - Visitanos en: http://jordan-sooftw.rhcloud.com/jordan-1/'});
     }, {scope: 'publish_actions'}
     );
 }
 
-function redireccionar(message) {
+function redireccionar(message,nombreLocal) {
     var pagina="https://twitter.com/intent/tweet?text=";
-    var url = pagina.concat(message);
+    var url = pagina.concat('En '+nombreLocal+': '+message+' - Visitanos en: http://jordan-sooftw.rhcloud.com/jordan-1/');
     location.href=url;
 } 

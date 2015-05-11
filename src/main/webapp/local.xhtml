@@ -117,10 +117,10 @@ Pagina que muestra la información de un local.
             <p:dialog header="Compartir en:" widgetVar="redes" modal="true" height="200" width="400">
                 <div align="center">
                     <h:panelGrid columns="2" cellpadding="10">
-                        <p:commandLink onclick="publicaMensaje($('textarea[id=&quot;Coment:comentario&quot;]')[0].value)" >
+                        <p:commandLink onclick="publicaMensaje($('textarea[id=&quot;Coment:comentario&quot;]')[0].value,'#{controladorLocal.local.nombre}')" >
                             <p:graphicImage library="imag" name="facebook.png" width="100" height="100"/>
                         </p:commandLink >
-                        <p:commandLink onclick="redireccionar($('textarea[id=&quot;Coment:comentario&quot;]')[0].value)">
+                        <p:commandLink onclick="redireccionar( $('textarea[id=&quot;Coment:comentario&quot;]')[0].value,'#{controladorLocal.local.nombre}')">
                             <p:graphicImage library="imag" name="twitter.png" width="100" height="100" />
                         </p:commandLink>
                     </h:panelGrid>

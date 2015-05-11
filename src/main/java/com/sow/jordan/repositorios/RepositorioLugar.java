@@ -20,7 +20,7 @@ public interface RepositorioLugar extends CrudRepository<Lugar, Integer> {
      * Método que carga la información de los lugares.
      * @return Una lista con la información.
      */
-    @Query("SELECT lugar FROM Lugar lugar")
+    @Query("SELECT lugar FROM Lugar lugar ORDER BY lugar.nombre")
     List<Lugar> cargarLugares();
     
     /**

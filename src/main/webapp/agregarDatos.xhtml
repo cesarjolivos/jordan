@@ -34,7 +34,7 @@ Pagina para agregar datos.
                                   value="#{controladorLocal.servicio.imagen}"/>
                     <p:commandButton ajax="false" 
                                      actionListener="#{controladorLocal.agregarServicio()}" 
-                                     value="Agregar Lugar" update=":servicios @form"/>
+                                     value="Agregar Servicio" update=":servicios @form"/>
                 </p:panelGrid>
             </h:form>
             
@@ -46,31 +46,39 @@ Pagina para agregar datos.
                                  value="#{controladorLocal.transporte.estación}" />
                     <p:commandButton ajax="false" 
                                      actionListener="#{controladorLocal.agregarTransporte()}" 
-                                     value="Agregar Lugar" update=":transportes @form"/>
+                                     value="Agregar Transporte" update=":transportes @form"/>
                 </p:panelGrid>
             </h:form>
             
             <h:form>
                 <p:dataTable value="#{controladorUsuario.usuarios}" var="_usuario">
-                    <p:column>#{_usuario.usuario}</p:column>
-                    <p:column>#{_usuario.contraseña}</p:column>
-                    <p:column>#{_usuario.privilegio}</p:column>
+                    <p:column headerText="Usuario">#{_usuario.usuario}</p:column>
+                    <p:column headerText="Contraseña">#{_usuario.contraseña}</p:column>
+                    <p:column headerText="Privilegio">#{_usuario.privilegio}</p:column>
                 </p:dataTable>
                 <p:dataTable value="#{controladorLocal.lugares}" var="_lugar">
                     <p:column headerText="Lugar">#{_lugar.nombre}</p:column>
                 </p:dataTable> 
                 <p:dataTable value="#{controladorLocal.servicios}" var="_servicio">
-                    <p:column headerText="Lugar">#{_servicio.nombre}</p:column>
+                    <p:column headerText="Servicio">#{_servicio.nombre}</p:column>
                     <p:column headerText="Imagen">
                         <h:graphicImage id="imagen" height="50" 
                                         rendered="#{_servicio.imagen ne null}"
                                         value="data:image/png;base64,#{_servicio.imagenUrl}"/> 
                     </p:column>
+                    <p:column headerText="Borrar">
+                        <p:commandButton value="Borrar" update="@form"
+                                         actionListener="#{controladorLocal.eliminarServicio(_servicio)}"/>
+                    </p:column>
                 </p:dataTable>
                 <p:dataTable value="#{controladorLocal.transportes}" var="_transporte">
-                    <p:column headerText="Lugar">#{_transporte.id}</p:column>
-                    <p:column headerText="Lugar">#{_transporte.tipo}</p:column>
-                    <p:column headerText="Lugar">#{_transporte.estación}</p:column>
+                    <p:column headerText="id">#{_transporte.id}</p:column>
+                    <p:column headerText="Tipo">#{_transporte.tipo}</p:column>
+                    <p:column headerText="Estación">#{_transporte.estación}</p:column>
+                    <p:column headerText="Borrar">
+                        <p:commandButton value="Borrar" update="@form"
+                                         actionListener="#{controladorLocal.eliminarTransporteCat(_transporte)}"/>
+                    </p:column>
                 </p:dataTable> 
             </h:form>
         </ui:define>

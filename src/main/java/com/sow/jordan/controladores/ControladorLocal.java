@@ -189,12 +189,26 @@ public class ControladorLocal implements Serializable {
     }
     
     /**
+     * Metodo que elimina un servicio del catalogo de servicios de los locales
+     * @param servicio Servicio que sera eliminado
+     */
+    public void eliminarServicio(Servicio servicio){
+        servicioLocal.eliminarServicio(servicio);
+        servicios = servicioLocal.cargarServicios();
+    }
+    
+    /**
      * Método que agrega un transporte al catalogo de transportes de cu.
      */
     public void agregarTransporte(){
         servicioLocal.guardarTransporte(transporte);
         transportes = servicioLocal.cargarTransportes();
         transporte = new Transporte();
+    }
+    
+    public void eliminarTransporteCat(Transporte transporte){
+        servicioLocal.eliminarTransporteCat(transporte);
+        transportes = servicioLocal.cargarTransportes();
     }
     
     /**
