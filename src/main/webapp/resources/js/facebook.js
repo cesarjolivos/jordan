@@ -7,7 +7,7 @@
 
 window.fbAsyncInit = function () {
     FB.init({
-        appId: '637246319742937',
+        appId: '1574160202872685',
         xfbml: true,
         version: 'v2.3'
     });
@@ -35,5 +35,5 @@ function publicaMensaje(message,loc) {
 function redireccionar(message,nombreLocal) {
     var pagina="https://twitter.com/intent/tweet?text=";
     var url = pagina.concat('En '+nombreLocal+': '+message+' - Visitanos en: http://jordan-sooftw.rhcloud.com/jordan-1/');
-    location.href=url;
+    window.open(url,'','width=600,height=400,left=50,top=50,toolbar=yes');
 } 
