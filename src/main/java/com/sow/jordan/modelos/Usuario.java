@@ -59,7 +59,10 @@ public class Usuario implements Serializable {
     /**
      * Variable que almacena los comentarios que a realizado el usuario.
      */
-    @OneToMany()
+    @OneToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            mappedBy = "usuario",
+            orphanRemoval = true)
     private  List<Comentario> comentarios;
 
     /**

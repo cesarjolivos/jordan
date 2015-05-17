@@ -163,8 +163,11 @@ public class ControladorLocal implements Serializable {
      */
     public void guardarComentario(){
         comentario.setUsuario(usuario);
+        comentario.setLocal(local);
+        //servicioLocal.guardarComentario(comentario);
         local.setComentarios( servicioLocal.comentarios(local, usuario) );
         local.getComentarios().add(comentario);
+        //local.setComentarios( servicioLocal.comentarios2(local));
         local.actualizarCalificacion();
         servicioLocal.guardarLocal(local);
         locales = servicioLocal.cargarLocales();
@@ -238,11 +241,14 @@ public class ControladorLocal implements Serializable {
     
     /**
      * Método que elimina un comentario de la base de datos.
-     * @param usuario El usuario que publico el comentario.
+     * @param usuari El usuario que publico el comentario.
+     * @param comentario El comentario a eliminar
      */
-    public void eliminarComentario(Usuario usuario) {
-        usuario = servicioUsuario.buscarUsuario(usuario.getUsuario());
-        local.setComentarios( servicioLocal.comentarios(local, usuario) );
+    public void eliminarComentario(Usuario usuari, Comentario comentario) {
+        //usuario = servicioUsuario.buscarUsuario(usuario.getUsuario());
+        //local.setComentarios( servicioLocal.comentarios(local, usuario) );
+        local.getComentarios().remove(comentario);
+        servicioLocal.eliminarComentario2(comentario);
         local.actualizarCalificacion();
         servicioLocal.guardarLocal(local);
         locales = servicioLocal.cargarLocales();
@@ -260,6 +266,7 @@ public class ControladorLocal implements Serializable {
         comentario = servicioLocal.buscarComentario(local, usuario);
         if(comentario == null){
             comentario = new Comentario();
+            comentario.setCalificación(5);
         }
         return controladorSesión.getSesionIniciada();
     }    

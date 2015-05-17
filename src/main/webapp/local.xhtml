@@ -108,7 +108,7 @@ Pagina que muestra la información de un local.
                         <p:outputLabel value="#{_comentario.usuario.usuario}" />
                         <p:outputLabel value="#{_comentario.comentario}" />
                         <p:commandButton rendered="#{controladorSesión.administrador}" update=":publicacion @form"
-                                         action="local" actionListener="#{controladorLocal.eliminarComentario(_comentario.usuario)}" 
+                                         action="local" actionListener="#{controladorLocal.eliminarComentario(_comentario.usuario,_comentario)}" 
                             value="Borrar" style="width: 100px; float: right; margin-right: 10%"/>
                     </p:panelGrid>
                 </p:dataScroller>

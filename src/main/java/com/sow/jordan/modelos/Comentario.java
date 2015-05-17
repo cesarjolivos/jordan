@@ -41,7 +41,7 @@ public class Comentario implements Serializable {
     /**
      * Variable que almacena la referencia al usuario.
      */
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Usuario usuario;
 
     /**
