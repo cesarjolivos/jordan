@@ -101,6 +101,7 @@ public class ControladorLocal implements Serializable {
     private int posición;//indica la posición en el top 5
     private String opciónDeBúsqueda;//variable que almacena la opción de búsqueda.
     private String busqueda;//variable que almacena lo que se decea buscar.
+    private String cad;//variable para mostrar los resultados de una busqueda
     /**
      * Variable para la búsqueda avanzada
      */
@@ -647,13 +648,17 @@ public class ControladorLocal implements Serializable {
         resultados.addAll(resul);
     }
 
-    public String cantidad() {
-        String cad = "0";
-        System.out.println("--" + resultados.size());
-        for (int i = 1; i < resultados.size(); i++) {
+    public String getCad() {
+        this.cad = "0";
+        //System.out.println("--" + resultados.size());
+        for (int i = 1; i < 101; i++) {
             cad += "," + i;
         }
         return cad;
+    }
+
+    public void setCad(String cad) {
+        this.cad = cad;
     }
 
 }
