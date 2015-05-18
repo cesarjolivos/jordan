@@ -9,7 +9,7 @@
     <!--Indica que el proyecto esta en fase de desarrollo-->
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value>
+        <param-value>Production</param-value>
     </context-param>
     <!--Pagina de inicio del sistema-->
     <welcome-file-list>
