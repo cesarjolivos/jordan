@@ -165,6 +165,8 @@ public interface ServicioLocal {
      */
     List<Comentario> comentarios(Local local, Usuario usuario);
     
+    List<Comentario> comentarios2(Local local);
+    
     /**
      * Método que elimina comenmtario de un local.
      * @param local El local.
@@ -178,5 +180,13 @@ public interface ServicioLocal {
      * @return Una lista de 5 locales con mejor puntuación.
      */
     List<Local> top5();
+    
+    /**
+     * Metodo que elimina un comentario
+     * @param comentario Comentario a eliminar
+     */
+    public void eliminarComentario2(Comentario comentario);
+
+    public void guardarComentario(Comentario comentario);
     
 }

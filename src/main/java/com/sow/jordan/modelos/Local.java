@@ -331,13 +331,17 @@ public class Local implements Serializable {
     }
     
     public void actualizarCalificacion(){
-        Iterator<Comentario> it = comentarios.iterator();
-        int suma = 0, n = 0;
-        while(it.hasNext()){
-            Comentario c = it.next();
-            suma += c.getCalificación(); n++;
-        }
-        setCalificación(suma/n);
+        if(!comentarios.isEmpty()){
+            Iterator<Comentario> it = comentarios.iterator();
+            int suma = 0, n = 0;
+            while (it.hasNext()) {
+                Comentario c = it.next();
+                suma += c.getCalificación();
+                n++;
+            }
+            setCalificación(suma / n);
+        }else
+            setCalificación(0.0);
     }
     
     /**
@@ -393,4 +397,21 @@ public class Local implements Serializable {
         return true;
     }
     
+    public boolean existeComentario(Usuario us){
+        boolean ret = false;
+        if(!comentarios.isEmpty()){
+            for(Comentario c:comentarios)
+                if(c.getUsuario().equals(us))
+                    ret = true;
+        }
+        return ret;
+    }
+
+    public void sustituyeComentario(Usuario us, Comentario come) {
+        for(Comentario c:comentarios)
+                if(c.getUsuario().getUsuario().equals(us.getUsuario())){
+                    c.setCalificación(come.getCalificación());
+                    c.setComentario(come.getComentario());
+                }
+    }
 }

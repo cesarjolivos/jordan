@@ -29,6 +29,9 @@ public class ServicioLocalImplementacion implements ServicioLocal {
 
     @Autowired
     private RepositorioTransporte repositorioTransporte;
+    
+    @Autowired
+    private RepositorioComentario repositorioComentario;
 
     /**
      * Método para guardar la información de los locales.
@@ -241,7 +244,12 @@ public class ServicioLocalImplementacion implements ServicioLocal {
     public List<Comentario> comentarios(Local local, Usuario usuario) {
         return repositorioLocal.comentarios(local, usuario);
     }
-
+    
+    @Override
+    public List<Comentario> comentarios2(Local local) {
+        return repositorioLocal.comentarios2(local);
+    }
+    
     /**
      * Método que elimina comenmtario de un local.
      *
@@ -272,5 +280,15 @@ public class ServicioLocalImplementacion implements ServicioLocal {
     @Override
     public void eliminarTransporteCat(Transporte transporte) {
         repositorioTransporte.delete(transporte);
+    }
+
+    @Override
+    public void eliminarComentario2(Comentario comentario) {
+        repositorioComentario.delete(comentario);
+    }
+
+    @Override
+    public void guardarComentario(Comentario comentario) {
+        repositorioComentario.save(comentario);
     }
 }

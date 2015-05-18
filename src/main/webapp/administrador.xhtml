@@ -171,8 +171,9 @@ Pagina que muestra las funciones del administrador.
             <p:dialog header="Eliminar Establecimiento" height="100%" modal="true" 
                       widgetVar="eliminarEstablecimiento">
                 <h:form>
-                    <h:panelGrid style="width: 800px">
-                        <p:dataTable var="_local" value="#{controladorLocal.locales}">
+                    <h:panelGrid style="width: 800px; height: 400px">
+                        <p:dataTable var="_local" value="#{controladorLocal.locales}"
+                                     scrollable="true" scrollHeight="400" >
                             <p:column headerText="Local" >
                                 <h:outputText value="#{_local.nombre}" style="width:400px"/>
                             </p:column>
