@@ -396,22 +396,4 @@ public class Local implements Serializable {
         final Local other = (Local) obj;
         return true;
     }
-    
-    public boolean existeComentario(Usuario us){
-        boolean ret = false;
-        if(!comentarios.isEmpty()){
-            for(Comentario c:comentarios)
-                if(c.getUsuario().equals(us))
-                    ret = true;
-        }
-        return ret;
-    }
-
-    public void sustituyeComentario(Usuario us, Comentario come) {
-        for(Comentario c:comentarios)
-                if(c.getUsuario().getUsuario().equals(us.getUsuario())){
-                    c.setCalificación(come.getCalificación());
-                    c.setComentario(come.getComentario());
-                }
-    }
 }

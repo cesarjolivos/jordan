@@ -9,8 +9,10 @@ import com.sow.jordan.modelos.Comentario;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- *
- * @author HectorJavier
+ * Interfaz que contiene las consultas a la base de datos.
+ * @author GARCÍA CASTRO HÉCTOR JAVIER
+ * @author OLIVOS NAVARRO CESAR JONATHAN
+ * @author VILLEGAS MORENO ZEUXIS DANIEL
  */
 public interface RepositorioComentario extends CrudRepository<Comentario, Integer>{
     

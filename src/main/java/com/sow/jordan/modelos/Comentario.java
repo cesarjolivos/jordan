@@ -122,7 +122,7 @@ public class Comentario implements Serializable {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 3;
@@ -131,7 +131,7 @@ public class Comentario implements Serializable {
         hash = 67 * hash + Objects.hashCode(this.calificación);
         return hash;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

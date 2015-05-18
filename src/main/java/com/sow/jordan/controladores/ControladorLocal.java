@@ -209,7 +209,10 @@ public class ControladorLocal implements Serializable {
         transportes = servicioLocal.cargarTransportes();
         transporte = new Transporte();
     }
-    
+    /**
+     * Metodo que elimina un transporte del catalogo de transportes de cu.
+     * @param transporte Transporte a eliminar
+     */
     public void eliminarTransporteCat(Transporte transporte){
         servicioLocal.eliminarTransporteCat(transporte);
         transportes = servicioLocal.cargarTransportes();
@@ -624,15 +627,23 @@ public class ControladorLocal implements Serializable {
         UploadedFile file = event.getFile();
         this.servicio.setImagen(file.getContents());
     }
-
+    /**
+     * Método que regresa los términos de la búsqueda avanzada
+     * @return Arreglo de cadenas que son los términos de la búsqueda
+     */
     public String[] getBavan() {
         return bavan;
     }
-
+    /**
+     * Método que establece los términos de la búsqueda avnazada
+     * @param bavan Arreglo de cadenas que son los términos de la búsqueda
+     */
     public void setBavan(String[] bavan) {
         this.bavan = bavan;
     }
-    
+    /**
+     * Metodo que establece los resultados de la búsqueda avanzada en la lista de resultados
+     */
     public void busquedaAvanzada() {
         HashSet<Local> resul = new HashSet<>();
         resultados.clear();
@@ -645,9 +656,21 @@ public class ControladorLocal implements Serializable {
                 }
             }
         }
+        for (Local l : locales) {
+            for (Transporte s : l.getTransportes()) {
+                for (String c : bavan) {
+                    if (s.getTipo().contains(c)) {
+                        resul.add(l);
+                    }
+                }
+            }
+        }
         resultados.addAll(resul);
     }
-
+    /**
+     * Metodo para obtener la numeración del resultado
+     * @return ïndice del resultado
+     */
     public String getCad() {
         this.cad = "0";
         //System.out.println("--" + resultados.size());
@@ -656,7 +679,10 @@ public class ControladorLocal implements Serializable {
         }
         return cad;
     }
-
+    /**
+     * Metodo que inicializa el atributo cad para la cuenta de resultados
+     * @param cad Índice inicial
+     */
     public void setCad(String cad) {
         this.cad = cad;
     }
