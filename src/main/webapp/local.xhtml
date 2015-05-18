@@ -93,7 +93,7 @@ Pagina que muestra la información de un local.
                         </h:panelGrid>
                     </h:panelGrid>
                     <p:inputTextarea id="comentario" style="width:99%" rows="2" placeholder="Comentario" 
-                                     value="#{controladorLocal.comentario.comentario}"/>
+                                     value="#{controladorLocal.comentario.comentario}" maxlength="80"/>
                 </h:panelGrid>
                 <p:commandButton 
                     value="Publicar" update=":publicacion @form" ajax="true" style="float: left"
