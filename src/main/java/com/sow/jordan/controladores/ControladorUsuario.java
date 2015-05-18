@@ -32,7 +32,7 @@ public class ControladorUsuario implements Serializable {
     @Autowired
     private ServicioUsuario servicioUsuario;
     /**
-     *
+     * Variable que realiza las acciones del correo
      */
     @Autowired
     private JavaMailSenderImpl mailSender;

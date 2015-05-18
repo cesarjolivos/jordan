@@ -100,7 +100,10 @@ public class ControladorSesión implements Serializable {
     public boolean getSesionIniciada() {
         return sesionIniciada;
     }
-
+    /**
+     * Método que retorna el usuario que tiene la sesión iniciada
+     * @return Usuario con la sesión iniciada
+     */
     public Usuario getUsuario() {
         return usuario;
     }

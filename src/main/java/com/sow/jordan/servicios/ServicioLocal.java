@@ -182,11 +182,15 @@ public interface ServicioLocal {
     List<Local> top5();
     
     /**
-     * Metodo que elimina un comentario
+     * Método que elimina un comentario
      * @param comentario Comentario a eliminar
      */
     public void eliminarComentario2(Comentario comentario);
 
+    /**
+     * Método que guarda un comentario
+     * @param comentario Comentario a guardar
+     */
     public void guardarComentario(Comentario comentario);
     
 }

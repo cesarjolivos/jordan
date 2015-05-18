@@ -239,12 +239,21 @@ public class ServicioLocalImplementacion implements ServicioLocal {
     public Comentario buscarComentario(Local local, Usuario usuario) {
         return repositorioLocal.buscarComentario(local, usuario);
     }
-
+    /**
+     * Método que devuelve los comentarios relacionados a un local y un usuario
+     * @param local Local con el que se relacionan los comentarios
+     * @param usuario Usuario con el que se relacionan los comentarios.
+     * @return 
+     */
     @Override
     public List<Comentario> comentarios(Local local, Usuario usuario) {
         return repositorioLocal.comentarios(local, usuario);
     }
-    
+    /**
+     * Método que devuelve los comentarios relacionados a un local
+     * @param local Local con el que se relacionana los comentarios.
+     * @return 
+     */
     @Override
     public List<Comentario> comentarios2(Local local) {
         return repositorioLocal.comentarios2(local);
@@ -271,22 +280,34 @@ public class ServicioLocalImplementacion implements ServicioLocal {
     public List<Local> top5() {
         return repositorioLocal.top5();
     }
-
+    /**
+     * Método que elimina un servicio del catálogo
+     * @param servicio Servicio a eliminar
+     */
     @Override
     public void eliminarServicio(Servicio servicio) {
         repositorioServicio.delete(servicio);
     }
-
+    /**
+     * Método que elimina un transporte del catálogo
+     * @param transporte Transporte a eliminar
+     */
     @Override
     public void eliminarTransporteCat(Transporte transporte) {
         repositorioTransporte.delete(transporte);
     }
-
+    /**
+     * Método que elimina un comentario de la Base de datos
+     * @param comentario Comentario a eliminar
+     */
     @Override
     public void eliminarComentario2(Comentario comentario) {
         repositorioComentario.delete(comentario);
     }
-
+    /**
+     * Método que guarda un comentario en la base de datos
+     * @param comentario Comentario a guardar
+     */
     @Override
     public void guardarComentario(Comentario comentario) {
         repositorioComentario.save(comentario);
